@@ -59,9 +59,12 @@ namespace JZExample
             if (_chooseFile?.Exists ?? false)
             {
                 ExcelHelper excelHelper = new ExcelHelper(_chooseFile.FullName);
-                var datatable = excelHelper.ExcelToDataTable("PP", true);
-                //DatabaseHelper.DeleteDatabase();
-                //DatabaseHelper.CreateProductTable("product");
+                var datatable = excelHelper.ExcelToDataTable("product", true);
+
+                DatabaseHelper.DeleteDatabase();
+                DatabaseHelper.CreateProductTable("product");
+
+                DatabaseHelper.InsertProductRows("product", datatable);
             }
             else
             {

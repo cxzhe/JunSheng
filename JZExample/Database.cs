@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,6 +99,70 @@ namespace JZExample
                     _connection.Open();
 
                 string sql = $"DROP TABLE IF EXISTS {tableName}";
+                SQLiteCommand command = new SQLiteCommand(sql, _connection);
+                return command.ExecuteNonQuery() > 0;
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                _connection.Close();
+            }
+
+            return false;
+        }
+
+
+        public static bool InsertProductRows(string tableName, DataTable dataTable)
+        {
+            if (_connection != null)
+                CreateConnection();
+            try
+            {
+                if (_connection.State == ConnectionState.Closed)
+                    _connection.Open();
+
+                string sql = "";
+                foreach (var row in dataTable.Rows)
+                {
+                    if (row is DataRow dataRow)
+                    {
+                        var ars = dataRow.ItemArray;
+
+                        sql += $"insert into {tableName} (no, qrcodedata) values ('{ars[0].ToString()}', '{ars[1].ToString()}');";
+
+                    }
+                }
+                //string sql = $"insert into {tableName} (no, qrcodedata) values ('{no}', '{qrcodedata}');";
+                SQLiteCommand command = new SQLiteCommand(sql, _connection);
+                return command.ExecuteNonQuery() > 0;
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                _connection.Close();
+            }
+
+            return false;
+
+            return false;
+        }
+
+        public static bool InsertProductRow(string tableName, string no, string qrcodedata)
+        {
+            if (_connection != null)
+                CreateConnection();
+            try
+            {
+                if (_connection.State == ConnectionState.Closed)
+                    _connection.Open();
+
+                string sql = $"insert into {tableName} (no, qrcodedata) values ('{no}', '{qrcodedata}')";
                 SQLiteCommand command = new SQLiteCommand(sql, _connection);
                 return command.ExecuteNonQuery() > 0;
             }
