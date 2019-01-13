@@ -39,7 +39,7 @@ namespace JZExample
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = false;
             openFileDialog.Title = "选择数据源文件";
-            openFileDialog.Filter = "所有文件(*.*)|*.*";
+            openFileDialog.Filter = "(*.xls,*.xlsx)|*.xls;*.xlsx;";
             //openFileDialog.ShowDialog();
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -51,6 +51,21 @@ namespace JZExample
                     fileSelectLabel.Text = openFileDialog.SafeFileName;
                     _chooseFile = new FileInfo(openFileDialog.FileName);
                 }
+            }
+        }
+
+        private void importButton_Click(object sender, EventArgs e)
+        {
+            if (_chooseFile?.Exists ?? false)
+            {
+                ExcelHelper excelHelper = new ExcelHelper(_chooseFile.FullName);
+                var datatable = excelHelper.ExcelToDataTable("PP", true);
+                //DatabaseHelper.DeleteDatabase();
+                //DatabaseHelper.CreateProductTable("product");
+            }
+            else
+            {
+                MessageBox.Show("请选择文件", "请选择文件");
             }
         }
     }

@@ -42,12 +42,12 @@ namespace JZExample
 
         private void codingBtn_Click(object sender, EventArgs e)
         {
-            codingInfoListView.Items.Add("Compare");
+            codingInfoListView.Items.Add("Start Coding");
         }
 
         private void compareBtn_Click(object sender, EventArgs e)
         {
-            compareInfoListView.Items.Add("Compare");
+            compareInfoListView.Items.Add("Start Compare");
 
         }
     }

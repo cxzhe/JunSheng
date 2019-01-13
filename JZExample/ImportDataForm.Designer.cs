@@ -47,6 +47,7 @@
             this.importButton.TabIndex = 3;
             this.importButton.Text = "导入数据";
             this.importButton.UseVisualStyleBackColor = true;
+            this.importButton.Click += new System.EventHandler(this.importButton_Click);
             // 
             // backToMainButton
             // 
@@ -106,7 +107,7 @@
             this.fileSelectLabel.Name = "fileSelectLabel";
             this.fileSelectLabel.Size = new System.Drawing.Size(157, 21);
             this.fileSelectLabel.TabIndex = 0;
-            this.fileSelectLabel.Text = "数据源文件选择";
+            this.fileSelectLabel.Text = "选择数据源文件";
             this.fileSelectLabel.Click += new System.EventHandler(this.groupBox1_Click);
             // 
             // ImportDataForm

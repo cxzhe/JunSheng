@@ -50,5 +50,12 @@ namespace JZExample
         {
             base.OnShown(e);
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            var form = new StatisticalQueryForm(this);
+            this.Hide();
+            form.Show();
+        }
     }
 }
