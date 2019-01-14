@@ -63,8 +63,9 @@ namespace JZExample
 
                 DatabaseHelper.DeleteDatabase();
                 DatabaseHelper.CreateProductTable("product");
-
                 DatabaseHelper.InsertProductRows("product", datatable);
+
+                MessageBox.Show("导入成功");
             }
             else
             {
