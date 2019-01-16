@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using JZExample.Model;
+
 namespace JZExample
 {
     public partial class Form1 : Form
@@ -19,6 +21,11 @@ namespace JZExample
         {
             InitializeComponent();
             _mainForm = new MainForm();
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
         }
 
         private void passwordTextBox_TextChanged(object sender, EventArgs e)
