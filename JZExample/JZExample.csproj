@@ -120,6 +120,7 @@
     <Compile Include="ImportDataForm.Designer.cs">
       <DependentUpon>ImportDataForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="JunShengDb.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

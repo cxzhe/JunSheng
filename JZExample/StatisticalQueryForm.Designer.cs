@@ -34,8 +34,9 @@
             this.queryBtn = new System.Windows.Forms.Button();
             this.backToMainBtn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.queryListView = new System.Windows.Forms.ListView();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // titleLabel
@@ -75,6 +76,7 @@
             this.queryBtn.TabIndex = 11;
             this.queryBtn.Text = "批次查询";
             this.queryBtn.UseVisualStyleBackColor = true;
+            this.queryBtn.Click += new System.EventHandler(this.queryBtn_Click);
             // 
             // backToMainBtn
             // 
@@ -89,7 +91,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.queryListView);
+            this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Location = new System.Drawing.Point(18, 102);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(770, 290);
@@ -97,13 +99,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "统计信息";
             // 
-            // queryListView
+            // dataGridView1
             // 
-            this.queryListView.Location = new System.Drawing.Point(6, 20);
-            this.queryListView.Name = "queryListView";
-            this.queryListView.Size = new System.Drawing.Size(758, 264);
-            this.queryListView.TabIndex = 0;
-            this.queryListView.UseCompatibleStateImageBehavior = false;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(6, 20);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(758, 264);
+            this.dataGridView1.TabIndex = 1;
             // 
             // StatisticalQueryForm
             // 
@@ -120,6 +124,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "均晟公司自动打码控制系统";
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -133,6 +138,6 @@
         private System.Windows.Forms.Button queryBtn;
         private System.Windows.Forms.Button backToMainBtn;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListView queryListView;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

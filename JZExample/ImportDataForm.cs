@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JZExample.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -58,14 +59,22 @@ namespace JZExample
         {
             if (_chooseFile?.Exists ?? false)
             {
-                ExcelHelper excelHelper = new ExcelHelper(_chooseFile.FullName);
-                var datatable = excelHelper.ExcelToDataTable("product", true);
+                var loader = new ExcelLoader();
+                var infos = loader.Load(_chooseFile.FullName);
+                if (!string.IsNullOrWhiteSpace(batchInfoTextBox.Text))
+                {
+                    foreach (var info in infos)
+                        info.BatchNo = batchInfoTextBox.Text;
+                }
 
-                DatabaseHelper.DeleteDatabase();
-                DatabaseHelper.CreateProductTable("product");
-                DatabaseHelper.InsertProductRows("product", datatable);
+                if (infos != null)
+                {
+                    //foreach (var info in infos)
+                    //    Console.WriteLine(info.QRCodeContent);
+                    var form = new ConfirmImportDataForm(infos);
+                    form.ShowDialog();
+                }
 
-                MessageBox.Show("导入成功");
             }
             else
             {
