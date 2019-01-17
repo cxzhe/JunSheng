@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace JZExample
 {
@@ -55,21 +53,22 @@ namespace JZExample
     //~FR|Field1|
 
 
+    //default to job update
     public class JobCommand
     {
-
-        public string Id { get; set; } = "JS";
+        public string Id { get; set; } = "JU";
         public char ReplyTiming { get; set; } = '0';
+        //empty means update current job
         public string JobName { get; set; }
-        public string Allocation { get; set; }
+        public string Allocation { get; set; } = "001";
         public Dictionary<string, string> Fields { get; private set; } = new Dictionary<string, string>();
 
         public string ToPacket()
         {
-            if (string.IsNullOrWhiteSpace(JobName))
-            {
-                throw new InvalidOperationException();
-            }
+            //if (string.IsNullOrWhiteSpace(JobName))
+            //{
+            //    throw new InvalidOperationException();
+            //}
 
             var sb = new StringBuilder();
             sb.Append(X30Packet.PacketStart);
@@ -78,7 +77,10 @@ namespace JZExample
             sb.Append(Id);
             sb.Append(ReplyTiming);
             sb.Append(X30Packet.Delimiter);
-            sb.Append(JobName);
+            if(!string.IsNullOrEmpty(JobName))
+            {
+                sb.Append(JobName);
+            }
             sb.Append(X30Packet.Delimiter);
 
             if (!string.IsNullOrWhiteSpace(Allocation) && Fields.Count > 0)
