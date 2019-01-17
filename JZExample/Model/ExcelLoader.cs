@@ -6,7 +6,6 @@ using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using NPOI.HSSF.UserModel;
 
-
 namespace JZExample.Model
 {
     public class ExcelLoader
@@ -21,14 +20,18 @@ namespace JZExample.Model
 
             if(extension == ".xlsx")
             {
-                var workbook = new XSSFWorkbook();
+                var workbook = new XSSFWorkbook(path);
                 return Load(workbook);
             }
 
             if(extension == ".xls")
             {
-                var workbook = new HSSFWorkbook();
-                return Load(workbook);
+                using(var stream = File.OpenRead(path))
+                {
+                    var workbook = new HSSFWorkbook(stream);
+                    return Load(workbook);
+                }
+                
             }
 
             return null;
@@ -37,6 +40,11 @@ namespace JZExample.Model
         private IEnumerable<BatchInfo> Load(IWorkbook workbook)
         {
             if(null == workbook)
+            {
+                return null;
+            }
+
+            if(workbook.NumberOfSheets <= 0)
             {
                 return null;
             }
@@ -51,21 +59,24 @@ namespace JZExample.Model
             for (int i = 0; i <= sheet.LastRowNum; i++)
             {
                 var row = sheet.GetRow(i);
-                if (row != null) //null is when the row only contains empty cells 
+                if(IsPossibleData(row))
                 {
-                    if(row.Cells.Count > 0)
+                    var bi = new BatchInfo()
                     {
-                        var bi = new BatchInfo()
-                        {
-                            SerinalNo = row.Cells[0].StringCellValue,
-                            QRCodeContent = row.Cells[1].StringCellValue
-                        };
-                        batchInfoList.Add(bi);
-                    }
-                    
+                        SerinalNo = (int)row.Cells[0].NumericCellValue,
+                        QRCodeContent = row.Cells[1].StringCellValue
+                    };
+                    batchInfoList.Add(bi);
                 }
             }
             return batchInfoList;
+        }
+
+        private bool IsPossibleData(IRow row)
+        {
+            return row != null && row.Cells.Count >= 2 &&
+                    row.Cells[0].CellType == CellType.Numeric &&
+                    row.Cells[1].CellType == CellType.String;
         }
     }
 }
