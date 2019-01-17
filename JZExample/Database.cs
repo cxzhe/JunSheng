@@ -149,8 +149,6 @@ namespace JZExample
             }
 
             return false;
-
-            return false;
         }
 
         public static bool InsertProductRow(string tableName, string no, string qrcodedata)
