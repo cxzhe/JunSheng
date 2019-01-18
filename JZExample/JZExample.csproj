@@ -129,6 +129,7 @@
     </Compile>
     <Compile Include="Model\BatchInfo.cs" />
     <Compile Include="Model\ExcelLoader.cs" />
+    <Compile Include="PrintController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SendHelper.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="StatisticalQueryForm.Designer.cs">
       <DependentUpon>StatisticalQueryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="X30Client.cs" />
     <Compile Include="X30Packet.cs" />
     <EmbeddedResource Include="CodingControlForm.resx">
       <DependentUpon>CodingControlForm.cs</DependentUpon>
