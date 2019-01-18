@@ -23,6 +23,8 @@ namespace JZExample
             base.OnClosing(e);
             Settings.Default.X30Ip = textBox1.Text;
             Settings.Default.QRField = textBox2.Text;
+
+            Settings.Default.Save();
         }
 
         private void label1_Click(object sender, EventArgs e)

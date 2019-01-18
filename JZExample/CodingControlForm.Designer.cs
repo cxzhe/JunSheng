@@ -33,9 +33,9 @@
             this.codingBtn = new System.Windows.Forms.Button();
             this.compareBtn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.codingInfoListView = new System.Windows.Forms.ListView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.compareInfoListView = new System.Windows.Forms.ListView();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -43,8 +43,8 @@
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
-            this.titleLabel.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.titleLabel.Location = new System.Drawing.Point(174, 9);
+            this.titleLabel.Font = new System.Drawing.Font("SimSun", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.titleLabel.Location = new System.Drawing.Point(174, 10);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(399, 33);
             this.titleLabel.TabIndex = 8;
@@ -52,10 +52,11 @@
             // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.Location = new System.Drawing.Point(638, 398);
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.Location = new System.Drawing.Point(638, 431);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(150, 40);
+            this.button2.Size = new System.Drawing.Size(150, 43);
             this.button2.TabIndex = 9;
             this.button2.Text = "返回主界面";
             this.button2.UseVisualStyleBackColor = true;
@@ -63,10 +64,11 @@
             // 
             // codingBtn
             // 
-            this.codingBtn.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.codingBtn.Location = new System.Drawing.Point(638, 214);
+            this.codingBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.codingBtn.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.codingBtn.Location = new System.Drawing.Point(638, 232);
             this.codingBtn.Name = "codingBtn";
-            this.codingBtn.Size = new System.Drawing.Size(150, 40);
+            this.codingBtn.Size = new System.Drawing.Size(150, 43);
             this.codingBtn.TabIndex = 10;
             this.codingBtn.Text = "打码";
             this.codingBtn.UseVisualStyleBackColor = true;
@@ -74,10 +76,11 @@
             // 
             // compareBtn
             // 
-            this.compareBtn.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.compareBtn.Location = new System.Drawing.Point(638, 308);
+            this.compareBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.compareBtn.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.compareBtn.Location = new System.Drawing.Point(638, 334);
             this.compareBtn.Name = "compareBtn";
-            this.compareBtn.Size = new System.Drawing.Size(150, 40);
+            this.compareBtn.Size = new System.Drawing.Size(150, 43);
             this.compareBtn.TabIndex = 11;
             this.compareBtn.Text = "对比";
             this.compareBtn.UseVisualStyleBackColor = true;
@@ -85,46 +88,48 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.codingInfoListView);
-            this.groupBox1.Location = new System.Drawing.Point(12, 60);
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Location = new System.Drawing.Point(12, 65);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(561, 179);
+            this.groupBox1.Size = new System.Drawing.Size(561, 194);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "打码信息";
             // 
-            // codingInfoListView
-            // 
-            this.codingInfoListView.Location = new System.Drawing.Point(7, 21);
-            this.codingInfoListView.Name = "codingInfoListView";
-            this.codingInfoListView.Size = new System.Drawing.Size(548, 152);
-            this.codingInfoListView.TabIndex = 0;
-            this.codingInfoListView.UseCompatibleStateImageBehavior = false;
-            this.codingInfoListView.View = System.Windows.Forms.View.Details;
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.compareInfoListView);
-            this.groupBox2.Location = new System.Drawing.Point(12, 248);
+            this.groupBox2.Location = new System.Drawing.Point(12, 269);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(561, 190);
+            this.groupBox2.Size = new System.Drawing.Size(561, 206);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "对比信息";
             // 
             // compareInfoListView
             // 
-            this.compareInfoListView.Location = new System.Drawing.Point(7, 21);
+            this.compareInfoListView.Location = new System.Drawing.Point(7, 23);
             this.compareInfoListView.Name = "compareInfoListView";
-            this.compareInfoListView.Size = new System.Drawing.Size(548, 163);
+            this.compareInfoListView.Size = new System.Drawing.Size(548, 176);
             this.compareInfoListView.TabIndex = 0;
             this.compareInfoListView.UseCompatibleStateImageBehavior = false;
             // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(7, 19);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(548, 169);
+            this.textBox1.TabIndex = 0;
+            // 
             // CodingControlForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 488);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.compareBtn);
@@ -135,6 +140,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "均晟公司自动打码控制系统";
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -149,7 +155,7 @@
         private System.Windows.Forms.Button compareBtn;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ListView codingInfoListView;
         private System.Windows.Forms.ListView compareInfoListView;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
