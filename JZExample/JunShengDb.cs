@@ -1,31 +1,44 @@
-﻿using JZExample.Model;
-using SQLite;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using JZExample.Model;
+using SQLite;
+
 namespace JZExample
 {
     public class JunShengDb : SQLiteConnection
     {
-        private const string _defaultDatabaseFilePath = "JunSheng.db";
-
-        public JunShengDb(string path = _defaultDatabaseFilePath) : base(path)
+        public static JunShengDb Create()
         {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string fullPath = Path.Combine(path, _defaultFileNameh);
+
+            return new JunShengDb(fullPath);
         }
 
-        public static int InsertBatchInfos(SQLiteConnection connection, IEnumerable<BatchInfo> infos)
+        private const string _defaultFileNameh = "JunSheng.db";
+
+        public JunShengDb(string path = _defaultFileNameh) : base(path)
         {
-            return connection.InsertAll(infos, true);
+            if(!File.Exists(path))
+            {
+                CreateTable<BatchInfo>();
+            }
         }
 
-        public static int DeleteAllBatchInfos(SQLiteConnection connection)
+        public int InsertBatchInfos(IEnumerable<BatchInfo> infos)
         {
-            return connection.DeleteAll<BatchInfo>();
+            return InsertAll(infos, true);
         }
+
+        //public static int DeleteAllBatchInfos(SQLiteConnection connection)
+        //{
+        //    return connection.DeleteAll<BatchInfo>();
+        //}
 
         public static IEnumerable<BatchInfo> QueryAllBatchInfos(SQLiteConnection connection)
         {
@@ -37,7 +50,7 @@ namespace JZExample
             return connection.Table<BatchInfo>().Where(info => info.BatchNo.Equals(batchNo));
         }
 
-        public static void DeleteDatabase(string path = _defaultDatabaseFilePath)
+        public static void DeleteDatabase(string path = _defaultFileNameh)
         {
             try
             {

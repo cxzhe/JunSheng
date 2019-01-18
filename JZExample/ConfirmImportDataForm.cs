@@ -55,7 +55,7 @@ namespace JZExample
             using (var db = new JunShengDb())
             {
                 //SqliteHelper.DeleteAllBatchInfos(db);
-                if (JunShengDb.InsertBatchInfos(db, batchInfos) > 0)
+                if (db.InsertBatchInfos(batchInfos) > 0)
                 {
                     MessageBox.Show($"导入成功");
                 }
