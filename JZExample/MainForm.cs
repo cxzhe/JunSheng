@@ -57,5 +57,12 @@ namespace JZExample
             this.Hide();
             form.Show();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var settingForm = new SettingForm();
+            settingForm.ShowDialog();
+
+        }
     }
 }

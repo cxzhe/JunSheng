@@ -42,7 +42,7 @@ namespace JZExample
         {
             if (!string.IsNullOrWhiteSpace(batchInfoTextBox.Text))
             {
-                using (var db = new JunShengDb())
+                using (var db = JunShengDb.Create())
                 {
                     var batchInfos = JunShengDb.QueryBatchInfosByBatch(db, batchInfoTextBox.Text).ToArray();
                     if (batchInfos.Length > 0)

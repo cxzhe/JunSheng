@@ -52,11 +52,12 @@ namespace JZExample
 
         private void importBtn_Click(object sender, EventArgs e)
         {
-            using (var db = new JunShengDb())
+            using (var db = JunShengDb.Create())
             {
                 //SqliteHelper.DeleteAllBatchInfos(db);
                 if (db.InsertBatchInfos(batchInfos) > 0)
                 {
+                    AppContext.Instance.BatchsToPrint = batchInfos.ToArray();
                     MessageBox.Show($"导入成功");
                 }
             }

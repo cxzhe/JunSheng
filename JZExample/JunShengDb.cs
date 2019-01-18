@@ -10,24 +10,41 @@ using SQLite;
 
 namespace JZExample
 {
+    public static class SQLiteConnectionHelper
+    {
+        public static bool TableExists<T>(this SQLiteConnection connection)
+        {
+            const string cmdText = "SELECT name FROM sqlite_master WHERE type='table' AND name=?";
+            var cmd = connection.CreateCommand(cmdText, typeof(T).Name);
+            return cmd.ExecuteScalar<string>() != null;
+        }
+    }
+
+
     public class JunShengDb : SQLiteConnection
     {
         public static JunShengDb Create()
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string fullPath = Path.Combine(path, _defaultFileNameh);
+            string dir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            dir = Path.Combine(dir, "JunSheng");
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+            string fullPath = Path.Combine(dir, _defaultFileNameh);
 
-            return new JunShengDb(fullPath);
+            var db = new JunShengDb(fullPath);
+            if (!db.TableExists<BatchInfo>())
+            {
+                db.CreateTable<BatchInfo>();
+            }
+            return db;
         }
 
         private const string _defaultFileNameh = "JunSheng.db";
 
-        public JunShengDb(string path = _defaultFileNameh) : base(path)
+        public JunShengDb(string path) : base(path)
         {
-            if(!File.Exists(path))
-            {
-                CreateTable<BatchInfo>();
-            }
         }
 
         public int InsertBatchInfos(IEnumerable<BatchInfo> infos)
