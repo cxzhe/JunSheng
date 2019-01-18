@@ -15,6 +15,7 @@ namespace JZExample
 
         public JunShengDb(string path = _defaultDatabaseFilePath) : base(path)
         {
+            this.CreateTable<BatchInfo>();
         }
 
         public static int InsertBatchInfos(SQLiteConnection connection, IEnumerable<BatchInfo> infos)
