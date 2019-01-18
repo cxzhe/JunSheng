@@ -60,19 +60,29 @@ namespace JZExample
             try
             {
                 var status = await _x30Client.GetPrinterStatusAsync();
+                if(status == PrinterStatus.IncorrectState || status == PrinterStatus.Fault)
+                {
+                    _isBusy = false;
+                    return;
+                }
+
                 if (status != _currentPrinterStatus)
                 {
-                    var jobUpdateCommand = new JobCommand();
-                    var bi = _batchsToPrint[_batchIndex + 1];
+                    if (status == PrinterStatus.ReadyToPrint)
+                    {
+                        var jobUpdateCommand = new JobCommand();
+                        var bi = _batchsToPrint[_batchIndex + 1];
 
-                    jobUpdateCommand.Fields.Add(QRFieldName, bi.QRCodeContent);
+                        jobUpdateCommand.Fields.Add(QRFieldName, bi.QRCodeContent);
 
-                    await _x30Client.UpdateJob(jobUpdateCommand);
+                        await _x30Client.UpdateJob(jobUpdateCommand);
 
-                    //log sent batch info
+                        //log sent batch info
 
-                    _batchIndex++;
-                    _currentPrinterStatus = status;
+                        _currentPrinterStatus = status;
+                        _batchIndex++;
+                        
+                    }
                 }
             }
             catch (Exception e)
