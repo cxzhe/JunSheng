@@ -25,7 +25,8 @@ namespace JZExample
         private Timer _timer;
 
         private BatchInfo[] _batchsToPrint;
-        private PrinterStatus? _currentPrinterStatus = null;
+        //private PrinterStatus? _currentPrinterStatus = null;
+        private ClearSendStatus? _currentClearStatus = null;
         private X30Client _x30Client;
         private bool _initialized = false;
         private int _batchIndex = -1;
@@ -50,7 +51,7 @@ namespace JZExample
             _batchsToPrint = batchsToPrint;
 
             _timer = new Timer();
-            _timer.Interval = 100;
+            _timer.Interval = 1000;
             _timer.Tick += _timer_Tick;
         }
 
@@ -84,17 +85,18 @@ namespace JZExample
 
             try
             {
-                var status = await _x30Client.GetPrinterStatusAsync();
-                if(status == PrinterStatus.IncorrectState || status == PrinterStatus.Fault)
-                {
-                    _isBusy = false;
-                    OnLog($"打码机错误 -- {status.ToString()}");
-                    return;
-                }
+                //await _x30Client.TcpClient.ConnectAsync(Settings.Default.X30Ip, 21000);
+                var status = await _x30Client.GetClearSendStatusAsync();
+                //if(status == PrinterStatus.IncorrectState || status == PrinterStatus.Fault)
+                //{
+                //    _isBusy = false;
+                //    OnLog($"打码机错误 -- {status.ToString()}");
+                //    return;
+                //}
 
-                if (status != _currentPrinterStatus)
-                {
-                    if (status == PrinterStatus.ReadyToPrint)
+                //if (status != _currentClearStatus)
+                //{
+                    if (status == ClearSendStatus.Ready)
                     {
                         CurrentBatchInfo.Status = BatchStatus.Printed;
 
@@ -103,23 +105,26 @@ namespace JZExample
 
                         jobUpdateCommand.Fields.Add(_fieldName, bi.QRCodeContent);
 
+                        //await _x30Client.TcpClient.ConnectAsync(Settings.Default.X30Ip, 21000);
                         await _x30Client.UpdateJob(jobUpdateCommand);
 
-                        _currentPrinterStatus = status;
+                        _currentClearStatus  = ClearSendStatus.NotReady;
                         _batchIndex++;
                         bi.Status = BatchStatus.CodeSent;
                         var message = $"{bi.SerinalNo} - {bi.QRCodeContent} 已赋码";
                         OnLog(message);
-                    }else
+                    }
+                    else
                     {
                         CurrentBatchInfo.Status = BatchStatus.Printing;
-                    }
+                        //OnLog("printing");
                 }
+                //}
             }
             catch (Exception e)
             {
                 var message = $"错误--{e.Message}";
-                OnLog("message");
+                OnLog(message);
             }
 
             _isBusy = false;
@@ -136,34 +141,28 @@ namespace JZExample
             _isBusy = true;
             try
             {
-                var status = await _x30Client.GetPrinterStatusAsync();
-                if (status == PrinterStatus.ReadyToPrint)
-                {
-                    _currentPrinterStatus = status;
+                var jobUpdateCommand = new JobCommand();
+                var bi = _batchsToPrint[0];
 
-                    var jobUpdateCommand = new JobCommand();
-                    var bi = _batchsToPrint[0];
+                jobUpdateCommand.Fields.Add(_fieldName, bi.QRCodeContent);
 
-                    jobUpdateCommand.Fields.Add(_fieldName, bi.QRCodeContent);
+                //await _x30Client.TcpClient.ConnectAsync(Settings.Default.X30Ip, 21000);
+                await _x30Client.UpdateJob(jobUpdateCommand);
 
-                    await _x30Client.UpdateJob(jobUpdateCommand);
+                //_currentClearStatus = ClearSendStatus.NotReady;
 
-                    //log sent batch info
-                    _initialized = true;
-                    _batchIndex = 0;
-                    bi.Status = BatchStatus.CodeSent;
-                    var message = $"成功初始化--{bi.SerinalNo} - {bi.QRCodeContent} 已赋码";
-                    OnLog("message");
-                }else
-                {
-                    var message = $"初始化失败--打码机状态 {status.ToString()}";
-                    OnLog("message");
-                }
+                //log sent batch info
+                _initialized = true;
+                _batchIndex = 0;
+              
+                bi.Status = BatchStatus.CodeSent;
+                var message = $"成功初始化--{bi.SerinalNo} - {bi.QRCodeContent} 已赋码";
+                OnLog(message);
             }
             catch (Exception e)
             {
                 var message = $"初始化失败--{e.Message}";
-                OnLog("message");
+                OnLog(message);
             }
 
             _isBusy = false;

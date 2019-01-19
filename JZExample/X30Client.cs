@@ -34,21 +34,60 @@ namespace JZExample
         Fault = 3
     }
 
+    public enum ClearSendStatus
+    {
+        Ready = 0,
+        NotReady = 1
+    }
+
+
+    
+
+    //    Message Identifier ~DV
+    //Message Body
+    //Status 1 character Optional
+    //Clear to Send status 1 character 0 – Ready to accept new data
+    //1 – Not ready to accept new data
+    //Example
+    //~DV1|
+    //~DV0|1| (if ‘Status’ field enabled)
+    //Note: If the NextGen device is not in the Producing state this response will be returned immediately
+    //(whatever the value of the ‘Response Timing’ field in the request) and report ‘Not Ready’.
+
     public class X30Client
     {
         private const int PORT = 21000;
         public TcpClient TcpClient { get; private set; }
 
-        public Encoding Encoding { get; private set; } = Encoding.UTF8;
+        public Encoding Encoding { get; private set; } = Encoding.ASCII;
 
         public X30Client()
         {
             TcpClient = new TcpClient();
         }
 
+        public async Task<ClearSendStatus> GetClearSendStatusAsync()
+        {
+            var packet = "{~DC0|}";
+            var response = await SendAsync(TcpClient, packet, Encoding);
+
+            //sample response {~DV0|1|}
+            if (response.StartsWith("{~DV0|") && response.Length > 6)
+            {
+                var statusChar = response[6];
+                int statusValue = Convert.ToInt32(statusChar) - Convert.ToInt32('0');
+                if (statusValue >= 0 && statusValue <= 1)
+                {
+                    return (ClearSendStatus)statusValue;
+                }
+            }
+            throw new InvalidDataException();
+        }
+
         public async Task<PrinterStatus> GetPrinterStatusAsync()
         {
-            var packet = "{~PS|0|}";
+            var packet = "{~PS0|}";
+      
             var response = await SendAsync(TcpClient, packet, Encoding);
 
             //sample response {~PR0|0|}
@@ -76,8 +115,10 @@ namespace JZExample
 
         private async Task<string> SendAsync(TcpClient tcpClient, string package, Encoding encoding)
         {
-            using (var stream = tcpClient.GetStream())
-            {
+
+            //using (var stream = tcpClient.GetStream())
+            var stream = tcpClient.GetStream();
+            //{
                 var bytes = encoding.GetBytes(package);
                 await stream.WriteAsync(bytes, 0, bytes.Length);
 
@@ -86,7 +127,7 @@ namespace JZExample
                 var count = await stream.ReadAsync(readerBuffer, 0, bufferSize);
                 var text = encoding.GetString(readerBuffer, 0, count);
                 return text;
-            }
+            //}
         }
 
     }
