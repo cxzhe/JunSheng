@@ -34,14 +34,6 @@ namespace JZExample
         Fault = 3
     }
 
-    public enum ClearSendStatus
-    {
-        Ready = 0,
-        NotReady = 1
-    }
-
-
-    
 
     //    Message Identifier ~DV
     //Message Body
@@ -53,6 +45,11 @@ namespace JZExample
     //~DV0|1| (if ‘Status’ field enabled)
     //Note: If the NextGen device is not in the Producing state this response will be returned immediately
     //(whatever the value of the ‘Response Timing’ field in the request) and report ‘Not Ready’.
+    public enum ClearSendStatus
+    {
+        Ready = 0,
+        NotReady = 1
+    }
 
     public class X30Client
     {
@@ -64,6 +61,11 @@ namespace JZExample
         public X30Client()
         {
             TcpClient = new TcpClient();
+        }
+
+        public Task ConnectAsync(string host)
+        {
+            return TcpClient.ConnectAsync(host, PORT);
         }
 
         public async Task<ClearSendStatus> GetClearSendStatusAsync()
@@ -113,22 +115,17 @@ namespace JZExample
             }
         }
 
-        private async Task<string> SendAsync(TcpClient tcpClient, string package, Encoding encoding)
+        private async Task<string> SendAsync(TcpClient tcpClient, string packet, Encoding encoding)
         {
-
-            //using (var stream = tcpClient.GetStream())
             var stream = tcpClient.GetStream();
-            //{
-                var bytes = encoding.GetBytes(package);
-                await stream.WriteAsync(bytes, 0, bytes.Length);
+            var bytes = encoding.GetBytes(packet);
+            await stream.WriteAsync(bytes, 0, bytes.Length);
 
-                var bufferSize = 1024 * 8;
-                var readerBuffer = new byte[bufferSize];
-                var count = await stream.ReadAsync(readerBuffer, 0, bufferSize);
-                var text = encoding.GetString(readerBuffer, 0, count);
-                return text;
-            //}
+            var bufferSize = 1024 * 8;
+            var readerBuffer = new byte[bufferSize];
+            var count = await stream.ReadAsync(readerBuffer, 0, bufferSize);
+            var text = encoding.GetString(readerBuffer, 0, count);
+            return text;
         }
-
     }
 }

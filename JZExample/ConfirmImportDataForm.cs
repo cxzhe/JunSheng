@@ -1,53 +1,60 @@
-﻿using JZExample.Model;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using JZExample.Model;
 
 namespace JZExample
 {
     public partial class ConfirmImportDataForm : Form
     {
-        private IEnumerable<BatchInfo> batchInfos;
+        //private IEnumerable<BatchInfo> batchInfos;
+        private string _path;
+        private BatchInfo[] _batchInfos;
 
-        public ConfirmImportDataForm(IEnumerable<BatchInfo> infos)
+        public ConfirmImportDataForm(string path)
         {
             InitializeComponent();
+            _path = path;
+            SetupDataGrid();
+        }
 
-            batchInfos = infos;
+        private void SetupDataGrid()
+        {
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
-            var dataTable = new DataTable();
-            var ccc = new DataColumn(nameof(BatchInfo.BatchNo));
-            dataTable.Columns.Add(new DataColumn(nameof(BatchInfo.BatchNo)));
-            dataTable.Columns.Add(new DataColumn(nameof(BatchInfo.SerinalNo)));
-            dataTable.Columns.Add(new DataColumn(nameof(BatchInfo.QRCodeContent)));
-            foreach (var info in batchInfos)
-            {
-                var row = dataTable.NewRow();
-                row[nameof(BatchInfo.BatchNo)] = info.BatchNo;
-                row[nameof(BatchInfo.SerinalNo)] = info.SerinalNo;
-                row[nameof(BatchInfo.QRCodeContent)] = info.QRCodeContent;
-                dataTable.Rows.Add(row);
-            }
+            var excelLoader = new ExcelLoader();
+            _batchInfos = excelLoader.Load(_path).ToArray();
+            dataGridView1.DataSource = _batchInfos;
 
-            dataGridView1.DataSource = dataTable;
+            //var dataTable = new DataTable();
+            //var ccc = new DataColumn(nameof(BatchInfo.BatchNo));
+            //dataTable.Columns.Add(new DataColumn(nameof(BatchInfo.BatchNo)));
+            //dataTable.Columns.Add(new DataColumn(nameof(BatchInfo.SerinalNo)));
+            //dataTable.Columns.Add(new DataColumn(nameof(BatchInfo.QRCodeContent)));
+            //foreach (var info in batchInfos)
+            //{
+            //    var row = dataTable.NewRow();
+            //    row[nameof(BatchInfo.BatchNo)] = info.BatchNo;
+            //    row[nameof(BatchInfo.SerinalNo)] = info.SerinalNo;
+            //    row[nameof(BatchInfo.QRCodeContent)] = info.QRCodeContent;
+            //    dataTable.Rows.Add(row);
+            //}
+
+            //dataGridView1.DataSource = dataTable;
             //dataGridView1.AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders);
-            dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            
         }
 
         private void cancelBtn_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void importBtn_Click(object sender, EventArgs e)
@@ -55,13 +62,13 @@ namespace JZExample
             using (var db = JunShengDb.Create())
             {
                 //SqliteHelper.DeleteAllBatchInfos(db);
-                if (db.InsertBatchInfos(batchInfos) > 0)
+                if (db.InsertBatchInfos(_batchInfos) > 0)
                 {
-                    AppContext.Instance.BatchsToPrint = batchInfos.ToArray();
+                    AppContext.Instance.BatchsToPrint = _batchInfos;
                     MessageBox.Show($"导入成功");
                 }
             }
-            this.Close();
+            Close();
         }
     }
 }

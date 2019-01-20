@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 using JZExample.Model;
@@ -85,41 +80,28 @@ namespace JZExample
 
             try
             {
-                //await _x30Client.TcpClient.ConnectAsync(Settings.Default.X30Ip, 21000);
                 var status = await _x30Client.GetClearSendStatusAsync();
-                //if(status == PrinterStatus.IncorrectState || status == PrinterStatus.Fault)
-                //{
-                //    _isBusy = false;
-                //    OnLog($"打码机错误 -- {status.ToString()}");
-                //    return;
-                //}
+                if (status == ClearSendStatus.Ready)
+                {
+                    CurrentBatchInfo.Status = BatchStatus.Printed;
 
-                //if (status != _currentClearStatus)
-                //{
-                    if (status == ClearSendStatus.Ready)
-                    {
-                        CurrentBatchInfo.Status = BatchStatus.Printed;
+                    var jobUpdateCommand = new JobCommand();
+                    var bi = _batchsToPrint[_batchIndex + 1];
 
-                        var jobUpdateCommand = new JobCommand();
-                        var bi = _batchsToPrint[_batchIndex + 1];
+                    jobUpdateCommand.Fields.Add(_fieldName, bi.QRCodeContent);
 
-                        jobUpdateCommand.Fields.Add(_fieldName, bi.QRCodeContent);
+                    await _x30Client.UpdateJob(jobUpdateCommand);
 
-                        //await _x30Client.TcpClient.ConnectAsync(Settings.Default.X30Ip, 21000);
-                        await _x30Client.UpdateJob(jobUpdateCommand);
-
-                        _currentClearStatus  = ClearSendStatus.NotReady;
-                        _batchIndex++;
-                        bi.Status = BatchStatus.CodeSent;
-                        var message = $"{bi.SerinalNo} - {bi.QRCodeContent} 已赋码";
-                        OnLog(message);
-                    }
-                    else
-                    {
-                        CurrentBatchInfo.Status = BatchStatus.Printing;
-                        //OnLog("printing");
+                    _currentClearStatus  = ClearSendStatus.NotReady;
+                    _batchIndex++;
+                    bi.Status = BatchStatus.CodeSent;
+                    var message = $"{bi.SerinalNo} - {bi.QRCodeContent} 已赋码";
+                    OnLog(message);
                 }
-                //}
+                else
+                {
+                    CurrentBatchInfo.Status = BatchStatus.Printing;
+                }
             }
             catch (Exception e)
             {
@@ -146,10 +128,7 @@ namespace JZExample
 
                 jobUpdateCommand.Fields.Add(_fieldName, bi.QRCodeContent);
 
-                //await _x30Client.TcpClient.ConnectAsync(Settings.Default.X30Ip, 21000);
                 await _x30Client.UpdateJob(jobUpdateCommand);
-
-                //_currentClearStatus = ClearSendStatus.NotReady;
 
                 //log sent batch info
                 _initialized = true;

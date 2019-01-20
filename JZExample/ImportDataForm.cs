@@ -67,13 +67,13 @@ namespace JZExample
                         info.BatchNo = batchInfoTextBox.Text;
                 }
 
-                if (infos != null)
-                {
-                    //foreach (var info in infos)
-                    //    Console.WriteLine(info.QRCodeContent);
-                    var form = new ConfirmImportDataForm(infos);
-                    form.ShowDialog();
-                }
+                //if (infos != null)
+                //{
+                //    //foreach (var info in infos)
+                //    //    Console.WriteLine(info.QRCodeContent);
+                //    var form = new ConfirmImportDataForm(infos);
+                //    form.ShowDialog();
+                //}
 
             }
             else

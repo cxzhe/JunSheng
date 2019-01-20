@@ -31,6 +31,8 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.importBtn = new System.Windows.Forms.Button();
             this.cancelBtn = new System.Windows.Forms.Button();
+            this.serialNumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qrColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,6 +43,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.serialNumberColumn,
+            this.qrColumn});
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
@@ -49,7 +54,8 @@
             // 
             // importBtn
             // 
-            this.importBtn.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.importBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.importBtn.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.importBtn.Location = new System.Drawing.Point(12, 669);
             this.importBtn.Name = "importBtn";
             this.importBtn.Size = new System.Drawing.Size(150, 40);
@@ -60,7 +66,8 @@
             // 
             // cancelBtn
             // 
-            this.cancelBtn.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancelBtn.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cancelBtn.Location = new System.Drawing.Point(899, 669);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(150, 40);
@@ -68,6 +75,21 @@
             this.cancelBtn.Text = "取消";
             this.cancelBtn.UseVisualStyleBackColor = true;
             this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
+            // 
+            // serialNumberColumn
+            // 
+            this.serialNumberColumn.DataPropertyName = "SerinalNo";
+            this.serialNumberColumn.HeaderText = "序号";
+            this.serialNumberColumn.Name = "serialNumberColumn";
+            this.serialNumberColumn.ReadOnly = true;
+            // 
+            // qrColumn
+            // 
+            this.qrColumn.DataPropertyName = "QRCodeContent";
+            this.qrColumn.HeaderText = "二维码数据";
+            this.qrColumn.Name = "qrColumn";
+            this.qrColumn.ReadOnly = true;
+            this.qrColumn.Width = 200;
             // 
             // ConfirmImportDataForm
             // 
@@ -89,5 +111,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button importBtn;
         private System.Windows.Forms.Button cancelBtn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn serialNumberColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn qrColumn;
     }
 }

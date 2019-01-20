@@ -92,7 +92,7 @@ namespace JZExample
             try
             {
                 var ip = Settings.Default.X30Ip;
-                await _x30Client.TcpClient.ConnectAsync(ip, 21000);
+                await _x30Client.ConnectAsync(ip);
                 Log("连接到X30");
                 //codingInfoListView.Items.Add("连接到X30");
 

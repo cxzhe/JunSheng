@@ -56,6 +56,16 @@ namespace JZExample
     //default to job update
     public class JobCommand
     {
+        public static JobCommand CreateJobUpdate()
+        {
+            return new JobCommand()
+            {
+                Id = "JU",
+                ReplyTiming = '0',
+                Allocation = "001"
+            };
+        }
+
         public string Id { get; set; } = "JU";
         public char ReplyTiming { get; set; } = '0';
         //empty means update current job

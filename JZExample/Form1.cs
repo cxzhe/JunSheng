@@ -29,7 +29,7 @@ namespace JZExample
         {
             base.OnLoad(e);
 
-            Test();
+            //Test();
 
         }
 
