@@ -14,6 +14,7 @@ namespace JZExample
         [STAThread]
         static void Main()
         {
+            AppContext.Instance.Load();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

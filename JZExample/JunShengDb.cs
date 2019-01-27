@@ -35,6 +35,11 @@ namespace JZExample
             {
                 db.CreateTable<BatchInfo>();
             }
+
+            //if (!db.TableExists<BatchOperationInfo>())
+            //{
+            //    db.CreateTable<BatchOperationInfo>();
+            //}
             return db;
         }
 

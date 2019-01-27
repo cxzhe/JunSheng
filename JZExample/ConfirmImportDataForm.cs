@@ -61,6 +61,7 @@ namespace JZExample
         {
             using (var db = JunShengDb.Create())
             {
+                db.DeleteAll<BatchInfo>();
                 //SqliteHelper.DeleteAllBatchInfos(db);
                 if (db.InsertBatchInfos(_batchInfos) > 0)
                 {

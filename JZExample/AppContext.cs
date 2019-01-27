@@ -10,11 +10,17 @@ namespace JZExample
     public class AppContext
     {
         public BatchInfo[] BatchsToPrint { get; set; }
-
+        public JunShengDb DB { get; private set; }
         public static readonly AppContext Instance = new AppContext();
 
         private AppContext()
         {
+            DB = JunShengDb.Create();
+        }
+
+        public void Load()
+        {
+            BatchsToPrint = DB.Table<BatchInfo>().ToArray();
         }
     }
 }

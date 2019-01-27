@@ -86,6 +86,24 @@ namespace JZExample
             throw new InvalidDataException();
         }
 
+        public async Task StateChangeAsync()
+        {
+            //~ST | 04 |
+            var packet = "{~ST|04|}";
+            var response = await SendAsync(TcpClient, packet, Encoding);
+
+            //if (response.StartsWith("{~DV0|") && response.Length > 6)
+            //{
+            //    var statusChar = response[6];
+            //    int statusValue = Convert.ToInt32(statusChar) - Convert.ToInt32('0');
+            //    if (statusValue >= 0 && statusValue <= 1)
+            //    {
+            //        return (ClearSendStatus)statusValue;
+            //    }
+            //}
+            //throw new InvalidDataException();
+        }
+
         public async Task<PrinterStatus> GetPrinterStatusAsync()
         {
             var packet = "{~PS0|}";

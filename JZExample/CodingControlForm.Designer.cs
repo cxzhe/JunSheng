@@ -29,119 +29,97 @@
         private void InitializeComponent()
         {
             this.titleLabel = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.codingBtn = new System.Windows.Forms.Button();
-            this.compareBtn = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.compareInfoListView = new System.Windows.Forms.ListView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.statusTextBox = new System.Windows.Forms.TextBox();
+            this.startButton = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.serinalNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qrColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.statusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // titleLabel
             // 
+            this.titleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.titleLabel.AutoSize = true;
             this.titleLabel.Font = new System.Drawing.Font("SimSun", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.titleLabel.Location = new System.Drawing.Point(174, 10);
+            this.titleLabel.Location = new System.Drawing.Point(459, 9);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(399, 33);
             this.titleLabel.TabIndex = 8;
             this.titleLabel.Text = "均晟公司自动打码控制系统";
             // 
-            // button2
+            // statusTextBox
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.Location = new System.Drawing.Point(638, 431);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(150, 43);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "返回主界面";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // codingBtn
-            // 
-            this.codingBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.codingBtn.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.codingBtn.Location = new System.Drawing.Point(638, 232);
-            this.codingBtn.Name = "codingBtn";
-            this.codingBtn.Size = new System.Drawing.Size(150, 43);
-            this.codingBtn.TabIndex = 10;
-            this.codingBtn.Text = "打码";
-            this.codingBtn.UseVisualStyleBackColor = true;
-            this.codingBtn.Click += new System.EventHandler(this.codingBtn_Click);
-            // 
-            // compareBtn
-            // 
-            this.compareBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.compareBtn.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.compareBtn.Location = new System.Drawing.Point(638, 334);
-            this.compareBtn.Name = "compareBtn";
-            this.compareBtn.Size = new System.Drawing.Size(150, 43);
-            this.compareBtn.TabIndex = 11;
-            this.compareBtn.Text = "对比";
-            this.compareBtn.UseVisualStyleBackColor = true;
-            this.compareBtn.Click += new System.EventHandler(this.compareBtn_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 65);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(561, 194);
-            this.groupBox1.TabIndex = 12;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "打码信息";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.compareInfoListView);
-            this.groupBox2.Location = new System.Drawing.Point(12, 269);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(561, 206);
-            this.groupBox2.TabIndex = 13;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "对比信息";
-            // 
-            // compareInfoListView
-            // 
-            this.compareInfoListView.Location = new System.Drawing.Point(7, 23);
-            this.compareInfoListView.Name = "compareInfoListView";
-            this.compareInfoListView.Size = new System.Drawing.Size(548, 176);
-            this.compareInfoListView.TabIndex = 0;
-            this.compareInfoListView.UseCompatibleStateImageBehavior = false;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.statusTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(7, 19);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(548, 169);
-            this.textBox1.TabIndex = 0;
+            this.statusTextBox.Location = new System.Drawing.Point(41, 133);
+            this.statusTextBox.Multiline = true;
+            this.statusTextBox.Name = "statusTextBox";
+            this.statusTextBox.ReadOnly = true;
+            this.statusTextBox.Size = new System.Drawing.Size(1239, 84);
+            this.statusTextBox.TabIndex = 9;
+            // 
+            // startButton
+            // 
+            this.startButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.startButton.Location = new System.Drawing.Point(1169, 60);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(111, 50);
+            this.startButton.TabIndex = 10;
+            this.startButton.Text = "开始打码";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.serinalNoColumn,
+            this.qrColumn,
+            this.statusColumn});
+            this.dataGridView1.Location = new System.Drawing.Point(41, 233);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(1240, 475);
+            this.dataGridView1.TabIndex = 11;
+            // 
+            // serinalNoColumn
+            // 
+            this.serinalNoColumn.DataPropertyName = "SerinalNo";
+            this.serinalNoColumn.HeaderText = "序号";
+            this.serinalNoColumn.Name = "serinalNoColumn";
+            this.serinalNoColumn.ReadOnly = true;
+            // 
+            // qrColumn
+            // 
+            this.qrColumn.DataPropertyName = "QRCodeContent";
+            this.qrColumn.HeaderText = "二维码内容";
+            this.qrColumn.Name = "qrColumn";
+            this.qrColumn.ReadOnly = true;
+            this.qrColumn.Width = 200;
+            // 
+            // statusColumn
+            // 
+            this.statusColumn.DataPropertyName = "Status";
+            this.statusColumn.HeaderText = "状态";
+            this.statusColumn.Name = "statusColumn";
+            this.statusColumn.ReadOnly = true;
             // 
             // CodingControlForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 488);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.compareBtn);
-            this.Controls.Add(this.codingBtn);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(1331, 720);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.startButton);
+            this.Controls.Add(this.statusTextBox);
             this.Controls.Add(this.titleLabel);
             this.Name = "CodingControlForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "均晟公司自动打码控制系统";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -150,12 +128,11 @@
         #endregion
 
         private System.Windows.Forms.Label titleLabel;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button codingBtn;
-        private System.Windows.Forms.Button compareBtn;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ListView compareInfoListView;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox statusTextBox;
+        private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn serinalNoColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn qrColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn statusColumn;
     }
 }

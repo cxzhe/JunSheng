@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace JZExample
 {
     public partial class MainForm : Form
     {
-        private ImportDataForm _importDataForm;
+        //private ImportDataForm _importDataForm;
 
         public MainForm()
         {
@@ -65,9 +58,15 @@ namespace JZExample
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var codingForm = new CodingControlForm(this);
-            Hide();
-            codingForm.Show();
+            if(AppContext.Instance.BatchsToPrint == null || AppContext.Instance.BatchsToPrint.Length <= 0)
+            {
+                MessageBox.Show("没有批次数据，请先导入");
+            }else
+            {
+                var codingForm = new CodingControlForm(this);
+                Hide();
+                codingForm.Show();
+            }
         }
 
         protected override void OnShown(EventArgs e)
