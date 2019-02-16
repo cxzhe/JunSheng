@@ -10,7 +10,7 @@ namespace JZExample.Model
 {
     public class ExcelLoader
     {
-        public IEnumerable<BatchInfo> Load(string path)
+        public IEnumerable<BatchItem> Load(string path)
         {
             var extension = Path.GetExtension(path).ToLower();
             if (string.IsNullOrEmpty(extension))
@@ -37,7 +37,7 @@ namespace JZExample.Model
             return null;
         }
 
-        private IEnumerable<BatchInfo> Load(IWorkbook workbook)
+        private IEnumerable<BatchItem> Load(IWorkbook workbook)
         {
             if(null == workbook)
             {
@@ -55,13 +55,13 @@ namespace JZExample.Model
                 return null;
             }
 
-            var batchInfoList = new List<BatchInfo>();
+            var batchInfoList = new List<BatchItem>();
             for (int i = 0; i <= sheet.LastRowNum; i++)
             {
                 var row = sheet.GetRow(i);
                 if(IsPossibleData(row))
                 {
-                    var bi = new BatchInfo()
+                    var bi = new BatchItem()
                     {
                         SerinalNo = (int)row.Cells[0].NumericCellValue,
                         QRCodeContent = row.Cells[1].StringCellValue

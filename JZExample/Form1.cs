@@ -17,12 +17,12 @@ namespace JZExample
     public partial class Form1 : Form
     {
         private const string _password = "admin";
-        private MainForm _mainForm;
+        private BatchListForm _mainForm;
 
         public Form1()
         {
             InitializeComponent();
-            _mainForm = new MainForm();
+            _mainForm = new BatchListForm();
         }
 
         protected override void OnLoad(EventArgs e)

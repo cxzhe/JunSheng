@@ -35,6 +35,7 @@
             this.serinalNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qrColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.returnButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,7 +45,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.titleLabel.AutoSize = true;
             this.titleLabel.Font = new System.Drawing.Font("SimSun", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.titleLabel.Location = new System.Drawing.Point(459, 9);
+            this.titleLabel.Location = new System.Drawing.Point(260, 9);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(399, 33);
             this.titleLabel.TabIndex = 8;
@@ -58,13 +59,13 @@
             this.statusTextBox.Multiline = true;
             this.statusTextBox.Name = "statusTextBox";
             this.statusTextBox.ReadOnly = true;
-            this.statusTextBox.Size = new System.Drawing.Size(1239, 84);
+            this.statusTextBox.Size = new System.Drawing.Size(883, 84);
             this.statusTextBox.TabIndex = 9;
             // 
             // startButton
             // 
             this.startButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.startButton.Location = new System.Drawing.Point(1169, 60);
+            this.startButton.Location = new System.Drawing.Point(813, 60);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(111, 50);
             this.startButton.TabIndex = 10;
@@ -74,15 +75,18 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.serinalNoColumn,
             this.qrColumn,
             this.statusColumn});
-            this.dataGridView1.Location = new System.Drawing.Point(41, 233);
+            this.dataGridView1.Location = new System.Drawing.Point(41, 245);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1240, 475);
+            this.dataGridView1.Size = new System.Drawing.Size(883, 353);
             this.dataGridView1.TabIndex = 11;
             // 
             // serinalNoColumn
@@ -102,20 +106,32 @@
             // 
             // statusColumn
             // 
-            this.statusColumn.DataPropertyName = "Status";
+            this.statusColumn.DataPropertyName = "StatusDescription";
             this.statusColumn.HeaderText = "状态";
             this.statusColumn.Name = "statusColumn";
             this.statusColumn.ReadOnly = true;
+            // 
+            // returnButton
+            // 
+            this.returnButton.Location = new System.Drawing.Point(41, 60);
+            this.returnButton.Name = "returnButton";
+            this.returnButton.Size = new System.Drawing.Size(111, 50);
+            this.returnButton.TabIndex = 12;
+            this.returnButton.Text = "返回";
+            this.returnButton.UseVisualStyleBackColor = true;
+            this.returnButton.Click += new System.EventHandler(this.returnButton_Click);
             // 
             // CodingControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1331, 720);
+            this.ClientSize = new System.Drawing.Size(975, 610);
+            this.Controls.Add(this.returnButton);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.statusTextBox);
             this.Controls.Add(this.titleLabel);
+            this.MaximizeBox = false;
             this.Name = "CodingControlForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "均晟公司自动打码控制系统";
@@ -134,5 +150,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn serinalNoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn qrColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn statusColumn;
+        private System.Windows.Forms.Button returnButton;
     }
 }

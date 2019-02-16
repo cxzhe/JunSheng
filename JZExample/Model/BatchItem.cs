@@ -15,13 +15,15 @@ namespace JZExample.Model
         NG
     }
 
-    public class BatchInfo: INotifyPropertyChanged
+    public class BatchItem: INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private BatchStatus _status;
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        public int BatchId { get; set; }
+
         public string BatchNo { get; set; }
         public int SerinalNo { get; set; }
         public string QRCodeContent { get; set; }
@@ -34,6 +36,31 @@ namespace JZExample.Model
                 {
                     _status = value;
                     OnPropertyChanged(nameof(Status));
+                    OnPropertyChanged(nameof(StatusDescription));
+                }
+            }
+        }
+
+        public string StatusDescription
+        {
+            get
+            {
+                switch (Status)
+                {
+                    case BatchStatus.Pending:
+                        return "等待中";
+                    case BatchStatus.CodeSent:
+                        return "已赋码";
+                    case BatchStatus.Printing:
+                        return "打印中";
+                    case BatchStatus.Printed:
+                        return "已打印";
+                    case BatchStatus.Confirmed:
+                        return "比对成功";
+                    case BatchStatus.NG:
+                        return "NG";
+                    default:
+                        return string.Empty;
                 }
             }
         }

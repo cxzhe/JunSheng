@@ -31,9 +31,14 @@ namespace JZExample
             string fullPath = Path.Combine(dir, _defaultFileNameh);
 
             var db = new JunShengDb(fullPath);
-            if (!db.TableExists<BatchInfo>())
+            if (!db.TableExists<BatchItem>())
             {
-                db.CreateTable<BatchInfo>();
+                db.CreateTable<BatchItem>();
+            }
+
+            if (!db.TableExists<Batch>())
+            {
+                db.CreateTable<Batch>();
             }
 
             //if (!db.TableExists<BatchOperationInfo>())
@@ -49,7 +54,7 @@ namespace JZExample
         {
         }
 
-        public int InsertBatchInfos(IEnumerable<BatchInfo> infos)
+        public int InsertBatchInfos(IEnumerable<BatchItem> infos)
         {
             return InsertAll(infos, true);
         }
@@ -59,14 +64,14 @@ namespace JZExample
         //    return connection.DeleteAll<BatchInfo>();
         //}
 
-        public static IEnumerable<BatchInfo> QueryAllBatchInfos(SQLiteConnection connection)
+        public static IEnumerable<BatchItem> QueryAllBatchInfos(SQLiteConnection connection)
         {
-            return connection.Table<BatchInfo>();
+            return connection.Table<BatchItem>();
         }
 
-        public static IEnumerable<BatchInfo> QueryBatchInfosByBatch(SQLiteConnection connection, string batchNo)
+        public static IEnumerable<BatchItem> QueryBatchInfosByBatch(SQLiteConnection connection, string batchNo)
         {
-            return connection.Table<BatchInfo>().Where(info => info.BatchNo.Equals(batchNo));
+            return connection.Table<BatchItem>().Where(info => info.BatchNo.Equals(batchNo));
         }
 
         public static void DeleteDatabase(string path = _defaultFileNameh)

@@ -58,15 +58,15 @@ namespace JZExample
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(AppContext.Instance.BatchsToPrint == null || AppContext.Instance.BatchsToPrint.Length <= 0)
-            {
-                MessageBox.Show("没有批次数据，请先导入");
-            }else
-            {
-                var codingForm = new CodingControlForm(this);
-                Hide();
-                codingForm.Show();
-            }
+            //if(AppContext.Instance.BatchsToPrint == null || AppContext.Instance.BatchsToPrint.Length <= 0)
+            //{
+            //    MessageBox.Show("没有批次数据，请先导入");
+            //}else
+            //{
+            //    var codingForm = new CodingControlForm(this);
+            //    Hide();
+            //    codingForm.Show();
+            //}
         }
 
         protected override void OnShown(EventArgs e)

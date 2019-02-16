@@ -80,6 +80,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppContext.cs" />
+    <Compile Include="BatchListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BatchListForm.Designer.cs">
+      <DependentUpon>BatchListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CodingControlForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,7 +119,8 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\BatchInfo.cs" />
+    <Compile Include="Model\Batch.cs" />
+    <Compile Include="Model\BatchItem.cs" />
     <Compile Include="Model\ExcelLoader.cs" />
     <Compile Include="PrintController.cs" />
     <Compile Include="Program.cs" />
@@ -138,6 +145,9 @@
     </Compile>
     <Compile Include="X30Client.cs" />
     <Compile Include="X30Packet.cs" />
+    <EmbeddedResource Include="BatchListForm.resx">
+      <DependentUpon>BatchListForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CodingControlForm.resx">
       <DependentUpon>CodingControlForm.cs</DependentUpon>
     </EmbeddedResource>

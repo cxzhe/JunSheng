@@ -1,34 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO.Ports;
 using System.Windows.Forms;
+
+using JZExample.Model;
 
 namespace JZExample
 {
     public partial class CodingControlForm : Form
     {
         private Form _mainForm;
-        //private X30Client _x30Client = new X30Client();
         private PrintController _printController;
+        private Batch _batch;
 
-        public CodingControlForm(Form form)
+        public CodingControlForm(Form form, Batch batch)
         {
             _mainForm = form;
+            _batch = batch;
             InitializeComponent();
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.DataSource = batch.Items;
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-
-            dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.DataSource = AppContext.Instance.BatchsToPrint;
             SetupPrintController();
         }
 
         private void SetupPrintController()
         {
-            var batchInfos = AppContext.Instance.BatchsToPrint;
-            _printController = new PrintController(batchInfos);
+            _printController = new PrintController(_batch.Items);
             _printController.FieldName = Settings.Default.QRField;
 
             _printController.SerialPort.BaudRate = Settings.Default.BaudRate;
@@ -81,12 +83,7 @@ namespace JZExample
         private async void Start()
         {
             startButton.Enabled = false;
-            if (AppContext.Instance.BatchsToPrint == null || AppContext.Instance.BatchsToPrint.Length == 0)
-            {
-                StartFailed("没有批次数据请先导入");
-                return;
-            }
-
+            
             if (string.IsNullOrWhiteSpace(Settings.Default.X30Ip))
             {
                 StartFailed("X30 ip还未设置");
@@ -159,6 +156,11 @@ namespace JZExample
         private void startButton_Click(object sender, EventArgs e)
         {
             Start();
+        }
+
+        private void returnButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

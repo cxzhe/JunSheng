@@ -48,17 +48,17 @@ namespace JZExample
                     if (batchInfos.Length > 0)
                     {
                         var dataTable = new DataTable();
-                        var ccc = new DataColumn(nameof(BatchInfo.BatchNo));
-                        dataTable.Columns.Add(new DataColumn(nameof(BatchInfo.BatchNo)));
-                        dataTable.Columns.Add(new DataColumn(nameof(BatchInfo.SerinalNo)));
-                        dataTable.Columns.Add(new DataColumn(nameof(BatchInfo.QRCodeContent)));
+                        var ccc = new DataColumn(nameof(BatchItem.BatchNo));
+                        dataTable.Columns.Add(new DataColumn(nameof(BatchItem.BatchNo)));
+                        dataTable.Columns.Add(new DataColumn(nameof(BatchItem.SerinalNo)));
+                        dataTable.Columns.Add(new DataColumn(nameof(BatchItem.QRCodeContent)));
 
                         foreach (var info in batchInfos)
                         {
                             var row = dataTable.NewRow();
-                            row[nameof(BatchInfo.BatchNo)] = info.BatchNo;
-                            row[nameof(BatchInfo.SerinalNo)] = info.SerinalNo;
-                            row[nameof(BatchInfo.QRCodeContent)] = info.QRCodeContent;
+                            row[nameof(BatchItem.BatchNo)] = info.BatchNo;
+                            row[nameof(BatchItem.SerinalNo)] = info.SerinalNo;
+                            row[nameof(BatchItem.QRCodeContent)] = info.QRCodeContent;
                             dataTable.Rows.Add(row);
                         }
 

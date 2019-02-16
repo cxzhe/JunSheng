@@ -24,7 +24,7 @@ namespace JZExample
         public X30Client X30Client { get; private set; }
         public string FieldName { get; set; }
 
-        private BatchInfo[] _batchsToPrint;
+        private BatchItem[] _batchsToPrint;
         private ClearSendStatus? _currentClearStatus = null;
        
         private bool _initialized = false;
@@ -38,12 +38,12 @@ namespace JZExample
             get { return _batchIndex; }
         }
 
-        public BatchInfo[] BatchsToPrint
+        public BatchItem[] BatchsToPrint
         {
             get { return _batchsToPrint; }
         }
 
-        protected BatchInfo CurrentBatchInfo
+        protected BatchItem CurrentBatchInfo
         {
             get { return _batchsToPrint[_batchIndex]; }
         }
@@ -52,7 +52,7 @@ namespace JZExample
         public event EventHandler<EventArgs> Printed;
 
         //make sure printer is ready to print when create PrintController
-        public PrintController(BatchInfo[] batchsToPrint)
+        public PrintController(BatchItem[] batchsToPrint)
         {
             X30Client = new X30Client();
 
