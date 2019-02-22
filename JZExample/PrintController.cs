@@ -1,4 +1,5 @@
 ﻿using System;
+//using System.Threading;
 using System.Linq;
 using System.IO.Ports;
 using System.Threading.Tasks;
@@ -14,6 +15,15 @@ namespace JZExample
         public PrintControllerLogEventArgs(string message)
         {
             Message = message;
+        }
+    }
+
+    public class CodeScanedEventArgs: EventArgs
+    {
+        public string Code { get; set; }
+        public CodeScanedEventArgs(string code)
+        {
+            Code = code;
         }
     }
 
@@ -43,13 +53,14 @@ namespace JZExample
             get { return _batchsToPrint; }
         }
 
-        protected BatchItem CurrentBatchInfo
+        protected BatchItem CurrentBatchItem
         {
             get { return _batchsToPrint[_batchIndex]; }
         }
 
         public event EventHandler<PrintControllerLogEventArgs> Logged;
         public event EventHandler<EventArgs> Printed;
+        public event EventHandler<CodeScanedEventArgs> CodeScaned;
 
         //make sure printer is ready to print when create PrintController
         public PrintController(BatchItem[] batchsToPrint)
@@ -104,7 +115,8 @@ namespace JZExample
                     }
                     else
                     {
-                        CurrentBatchInfo.Status = BatchStatus.Printed;
+                        CurrentBatchItem.Status = BatchStatus.Printed;
+                        AppContext.Instance.DB.Update(CurrentBatchItem);
 
                         var jobUpdateCommand = new JobCommand();
                         var bi = _batchsToPrint[_batchIndex + 1];
@@ -116,6 +128,7 @@ namespace JZExample
                         _currentClearStatus = ClearSendStatus.NotReady;
                         _batchIndex++;
                         bi.Status = BatchStatus.CodeSent;
+                        AppContext.Instance.DB.Update(bi);
                         var message = $"{bi.SerinalNo} - {bi.QRCodeContent} 已赋码";
                         OnLog(message);
                         Printed?.Invoke(this, EventArgs.Empty);
@@ -123,7 +136,7 @@ namespace JZExample
                 }
                 else
                 {
-                    CurrentBatchInfo.Status = BatchStatus.Printing;
+                    CurrentBatchItem.Status = BatchStatus.Printing;
                 }
             }
             catch (Exception e)
@@ -146,6 +159,7 @@ namespace JZExample
             _isBusy = true;
             try
             {
+                await X30Client.StateChangeAsync();
                 var jobUpdateCommand = new JobCommand();
                 var bi = _batchsToPrint[0];
 
@@ -177,21 +191,28 @@ namespace JZExample
                 _timer.Start();
             }
 
-            var task = Task.Run(() =>
+            Task.Run(() =>
             {
-                while (true)
+                while (SerialPort.IsOpen)
                 {
                     try
                     {
-                        if (!SerialPort.IsOpen)
-                        {
-                            break;
-                        }
-
-                        string code = SerialPort.ReadLine();
-                        var batchInfo = _batchsToPrint.FirstOrDefault(bi => bi.QRCodeContent == code && bi.Status != BatchStatus.Confirmed);
-                        batchInfo.Status = BatchStatus.Confirmed;
-                        AppContext.Instance.DB.Update(batchInfo);
+                        string code = SerialPort.ReadLine().Trim();
+                        CodeScaned?.Invoke(this, new CodeScanedEventArgs(code));
+                        //Task.Factory.StartNew(() =>
+                        //{
+                        //    var batchItem = _batchsToPrint.FirstOrDefault(bi => bi.QRCodeContent == code && bi.Status != BatchStatus.Confirmed);
+                        //    batchItem.Status = BatchStatus.Confirmed;
+                        //    AppContext.Instance.DB.Update(batchItem);
+                        //}, 
+                        //System.Threading.CancellationToken.None,
+                        //TaskCreationOptions.None,
+                        //TaskScheduler.FromCurrentSynchronizationContext());
+                        //var t = new Task(() =>
+                        //{
+                           
+                        //});
+                        //t.Start(TaskScheduler.FromCurrentSynchronizationContext());
                     }
                     catch (Exception)
                     {

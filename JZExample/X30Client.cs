@@ -89,7 +89,7 @@ namespace JZExample
         public async Task StateChangeAsync()
         {
             //~ST | 04 |
-            var packet = "{~ST|04|}";
+            var packet = "{~ST|06|}";
             var response = await SendAsync(TcpClient, packet, Encoding);
 
             //if (response.StartsWith("{~DV0|") && response.Length > 6)

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 using JZExample.Model;
 
@@ -19,7 +21,7 @@ namespace JZExample
             _batch = batch;
             InitializeComponent();
             dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.DataSource = batch.Items;
+            dataGridView1.DataSource = new BindingList<BatchItem>(batch.Items);
         }
 
         protected override void OnLoad(EventArgs e)
@@ -32,6 +34,7 @@ namespace JZExample
         {
             _printController = new PrintController(_batch.Items);
             _printController.FieldName = Settings.Default.QRField;
+            _printController.CodeScaned += _printController_CodeScaned;
 
             _printController.SerialPort.BaudRate = Settings.Default.BaudRate;
             _printController.SerialPort.DataBits = Settings.Default.DataBitss;
@@ -39,6 +42,21 @@ namespace JZExample
             _printController.SerialPort.StopBits = StopBits.One;
             _printController.SerialPort.ReadTimeout = 1000;
             _printController.SerialPort.PortName = Settings.Default.PortName;
+        }
+
+        private void _printController_CodeScaned(object sender, CodeScanedEventArgs e)
+        {
+            Action action = () =>
+            {
+                var items = _batch.Items;
+                var batchItem = items.FirstOrDefault(bi => bi.QRCodeContent == e.Code && bi.Status != BatchStatus.Confirmed);
+                if(null != batchItem)
+                {
+                    batchItem.Status = BatchStatus.Confirmed;
+                    AppContext.Instance.DB.Update(batchItem);
+                }
+            };
+            BeginInvoke(action);
         }
 
         private void _printController_Logged(object sender, PrintControllerLogEventArgs e)
@@ -55,7 +73,7 @@ namespace JZExample
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             base.OnFormClosed(e);
-
+            _printController.Close();
             _mainForm.Show();
         }
 
@@ -145,7 +163,7 @@ namespace JZExample
         private void _printController_Printed(object sender, EventArgs e)
         {
             var msg = $"已打印{_printController.BatchIndex}条，共{_printController.BatchsToPrint.Length}条";
-            statusTextBox.Text = "";
+            statusTextBox.Text = msg;
         }
 
         private void compareBtn_Click(object sender, EventArgs e)
@@ -160,6 +178,7 @@ namespace JZExample
 
         private void returnButton_Click(object sender, EventArgs e)
         {
+            //_batch.Items[0].Status = BatchStatus.NG;
             Close();
         }
     }

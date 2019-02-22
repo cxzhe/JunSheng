@@ -23,6 +23,12 @@ namespace JZExample
         {
             InitializeComponent();
             _mainForm = new BatchListForm();
+            _mainForm.FormClosed += _mainForm_FormClosed;
+        }
+
+        private void _mainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Close();
         }
 
         protected override void OnLoad(EventArgs e)
