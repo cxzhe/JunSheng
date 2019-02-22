@@ -23,7 +23,8 @@ namespace JZExample
 
         public void Load()
         {
-            Batchs = new BindingList<Batch>(DB.Table<Batch>().ToList());
+            var bs = DB.Table<Batch>().OrderByDescending(b => b.CreateTime).ToList();
+            Batchs = new BindingList<Batch>(bs);
             Batchs.AllowNew = false;
             foreach (var b in Batchs)
             {

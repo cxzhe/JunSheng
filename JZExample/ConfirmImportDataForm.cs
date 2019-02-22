@@ -72,7 +72,7 @@ namespace JZExample
             });
             batch.Items = _batchItems;
 
-            AppContext.Instance.Batchs.Add(batch);
+            AppContext.Instance.Batchs.Insert(0, batch);
             //MessageBox.Show($"导入成功");
             Close();
         }
