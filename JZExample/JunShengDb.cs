@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 
@@ -39,12 +40,16 @@ namespace JZExample
             if (!db.TableExists<Batch>())
             {
                 db.CreateTable<Batch>();
+            }else
+            {
+                var mapping = db.GetMapping<Batch>();
+                var columns = db.GetTableInfo(nameof(Batch));
+                if(!columns.Any(c => c.Name == nameof(Batch.CompleteCount)))
+                {
+                    string sql = $"ALTER TABLE {nameof(Batch)} ADD COLUMN {nameof(Batch.CompleteCount)} INTEGER";
+                    db.Execute(sql);
+                }
             }
-
-            //if (!db.TableExists<BatchOperationInfo>())
-            //{
-            //    db.CreateTable<BatchOperationInfo>();
-            //}
             return db;
         }
 

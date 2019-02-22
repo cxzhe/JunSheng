@@ -1,22 +1,42 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
+
+using JZExample.Model;
 
 namespace JZExample
 {
     public partial class BatchListForm : Form
     {
+        private BindingList<Batch> _batchs;
+
         public BatchListForm()
         {
             InitializeComponent();
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.CellContentClick += DataGridView1_CellContentClick;
+            dataGridView1.CellDoubleClick += DataGridView1_CellDoubleClick;
         }
+
+        private void DataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dataGridView1.Columns.IndexOf(compleCountColumn))
+            {
+                var batch = _batchs[e.RowIndex];
+                var editFrom = new EditCompleteCountForm(batch);
+                editFrom.ShowDialog();
+
+                //dataGridView1.BeginEdit(false);
+            }
+        }
+
+       
 
         private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if(e.ColumnIndex == dataGridView1.Columns.IndexOf(printColumn))
             {
-                var batch = AppContext.Instance.Batchs[e.RowIndex];
+                var batch = _batchs[e.RowIndex];
                 if(batch.ItemsCount <= 0)
                 {
                     MessageBox.Show("没有批次条目");
@@ -33,7 +53,8 @@ namespace JZExample
         {
             base.OnLoad(e);
             AppContext.Instance.Load();
-            dataGridView1.DataSource = AppContext.Instance.Batchs;
+            _batchs = AppContext.Instance.Batchs;
+            dataGridView1.DataSource = _batchs;
         }
 
         private void importButton_Click(object sender, EventArgs e)

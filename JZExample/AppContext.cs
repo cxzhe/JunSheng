@@ -29,6 +29,10 @@ namespace JZExample
             foreach (var b in Batchs)
             {
                 b.Items = DB.Table<BatchItem>().Where(bi => bi.BatchId == b.Id).ToArray();
+                if(b.CompleteCount == 0)
+                {
+                    b.CompleteCount = b.Items.Length;
+                }
             }
         }
     }

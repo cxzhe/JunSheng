@@ -71,6 +71,7 @@ namespace JZExample
                 }
             });
             batch.Items = _batchItems;
+            batch.CompleteCount = _batchItems.Length;
 
             AppContext.Instance.Batchs.Insert(0, batch);
             //MessageBox.Show($"导入成功");

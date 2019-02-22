@@ -99,6 +99,12 @@
       <DependentUpon>ConfirmImportDataForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Database.cs" />
+    <Compile Include="EditCompleteCountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditCompleteCountForm.Designer.cs">
+      <DependentUpon>EditCompleteCountForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExcelHelper.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -153,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ConfirmImportDataForm.resx">
       <DependentUpon>ConfirmImportDataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditCompleteCountForm.resx">
+      <DependentUpon>EditCompleteCountForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

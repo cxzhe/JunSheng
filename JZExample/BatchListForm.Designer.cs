@@ -30,11 +30,12 @@
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.importButton = new System.Windows.Forms.Button();
+            this.settingButton = new System.Windows.Forms.Button();
             this.batchColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemsCountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.compleCountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.createTimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.printColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.settingButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,11 +50,11 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.batchColumn,
             this.itemsCountColumn,
+            this.compleCountColumn,
             this.createTimeColumn,
             this.printColumn});
             this.dataGridView1.Location = new System.Drawing.Point(12, 71);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(776, 367);
             this.dataGridView1.TabIndex = 0;
@@ -67,6 +68,16 @@
             this.importButton.Text = "导入批次";
             this.importButton.UseVisualStyleBackColor = true;
             this.importButton.Click += new System.EventHandler(this.importButton_Click);
+            // 
+            // settingButton
+            // 
+            this.settingButton.Location = new System.Drawing.Point(145, 12);
+            this.settingButton.Name = "settingButton";
+            this.settingButton.Size = new System.Drawing.Size(102, 39);
+            this.settingButton.TabIndex = 2;
+            this.settingButton.Text = "系统设置";
+            this.settingButton.UseVisualStyleBackColor = true;
+            this.settingButton.Click += new System.EventHandler(this.settingButton_Click);
             // 
             // batchColumn
             // 
@@ -83,6 +94,13 @@
             this.itemsCountColumn.Name = "itemsCountColumn";
             this.itemsCountColumn.ReadOnly = true;
             // 
+            // compleCountColumn
+            // 
+            this.compleCountColumn.DataPropertyName = "CompleteCount";
+            this.compleCountColumn.HeaderText = "完成数量";
+            this.compleCountColumn.Name = "compleCountColumn";
+            this.compleCountColumn.ReadOnly = true;
+            // 
             // createTimeColumn
             // 
             this.createTimeColumn.DataPropertyName = "CreateTime";
@@ -97,16 +115,6 @@
             this.printColumn.Name = "printColumn";
             this.printColumn.ReadOnly = true;
             this.printColumn.Text = "打码";
-            // 
-            // settingButton
-            // 
-            this.settingButton.Location = new System.Drawing.Point(145, 12);
-            this.settingButton.Name = "settingButton";
-            this.settingButton.Size = new System.Drawing.Size(102, 39);
-            this.settingButton.TabIndex = 2;
-            this.settingButton.Text = "系统设置";
-            this.settingButton.UseVisualStyleBackColor = true;
-            this.settingButton.Click += new System.EventHandler(this.settingButton_Click);
             // 
             // BatchListForm
             // 
@@ -128,10 +136,11 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button importButton;
+        private System.Windows.Forms.Button settingButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn batchColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemsCountColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn compleCountColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn createTimeColumn;
         private System.Windows.Forms.DataGridViewButtonColumn printColumn;
-        private System.Windows.Forms.Button settingButton;
     }
 }
