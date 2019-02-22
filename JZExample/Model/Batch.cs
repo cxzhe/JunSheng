@@ -30,6 +30,9 @@ namespace JZExample.Model
         [Ignore]
         public BatchItem[] Items { get; set; }
 
+        [Ignore]
+        public int StartIndex { get; set; } = 0;
+
         public int ItemsCount
         {
             get

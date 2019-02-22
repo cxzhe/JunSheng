@@ -35,6 +35,8 @@ namespace JZExample
         public string FieldName { get; set; }
 
         private BatchItem[] _batchsToPrint;
+        private Batch _batch;
+
         private ClearSendStatus? _currentClearStatus = null;
        
         private bool _initialized = false;
@@ -42,6 +44,15 @@ namespace JZExample
         private bool _isBusy = false;
 
         public SerialPort SerialPort { get; private set; }
+
+        public bool IsComplete
+        {
+            get
+            {
+                return _batchIndex == _batchsToPrint.Length - 1 ||
+                        _batchsToPrint.Count(i => i.Status == BatchStatus.Confirmed) >= _batch.CompleteCount;
+            }
+        }
 
         public int BatchIndex
         {
@@ -60,14 +71,16 @@ namespace JZExample
 
         public event EventHandler<PrintControllerLogEventArgs> Logged;
         public event EventHandler<EventArgs> Printed;
+        public event EventHandler<EventArgs> PrintCompleted;
         public event EventHandler<CodeScanedEventArgs> CodeScaned;
 
         //make sure printer is ready to print when create PrintController
-        public PrintController(BatchItem[] batchsToPrint)
+        public PrintController(Batch batch)
         {
             X30Client = new X30Client();
 
-            _batchsToPrint = batchsToPrint;
+            _batch = batch;
+            _batchsToPrint = batch.Items;
 
             SerialPort = new SerialPort();
 
@@ -109,9 +122,9 @@ namespace JZExample
                 var status = await X30Client.GetClearSendStatusAsync();
                 if (status == ClearSendStatus.Ready)
                 {
-                    if(_batchIndex == _batchsToPrint.Length - 1)
+                    if(IsComplete)
                     {
-
+                        PrintCompleted?.Invoke(this, EventArgs.Empty);
                     }
                     else
                     {
@@ -161,7 +174,7 @@ namespace JZExample
             {
                 await X30Client.StateChangeAsync();
                 var jobUpdateCommand = new JobCommand();
-                var bi = _batchsToPrint[0];
+                var bi = _batchsToPrint[_batch.StartIndex];
 
                 jobUpdateCommand.Fields.Add(FieldName, bi.QRCodeContent);
 
@@ -169,7 +182,7 @@ namespace JZExample
 
                 //log sent batch info
                 _initialized = true;
-                _batchIndex = 0;
+                _batchIndex = _batch.StartIndex;
               
                 bi.Status = BatchStatus.CodeSent;
                 var message = $"成功初始化--{bi.SerinalNo} - {bi.QRCodeContent} 已赋码";
@@ -199,24 +212,9 @@ namespace JZExample
                     {
                         string code = SerialPort.ReadLine().Trim();
                         CodeScaned?.Invoke(this, new CodeScanedEventArgs(code));
-                        //Task.Factory.StartNew(() =>
-                        //{
-                        //    var batchItem = _batchsToPrint.FirstOrDefault(bi => bi.QRCodeContent == code && bi.Status != BatchStatus.Confirmed);
-                        //    batchItem.Status = BatchStatus.Confirmed;
-                        //    AppContext.Instance.DB.Update(batchItem);
-                        //}, 
-                        //System.Threading.CancellationToken.None,
-                        //TaskCreationOptions.None,
-                        //TaskScheduler.FromCurrentSynchronizationContext());
-                        //var t = new Task(() =>
-                        //{
-                           
-                        //});
-                        //t.Start(TaskScheduler.FromCurrentSynchronizationContext());
                     }
                     catch (Exception)
                     {
-                        //throw;
                     }
                 }
             });

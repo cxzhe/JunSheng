@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using System.Collections.Generic;
+using System.Drawing;
 using System.IO.Ports;
 using System.Windows.Forms;
 using System.ComponentModel;
@@ -22,6 +22,25 @@ namespace JZExample
             InitializeComponent();
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.DataSource = new BindingList<BatchItem>(batch.Items);
+
+            dataGridView1.CellFormatting += DataGridView1_CellFormatting;
+            dataGridView1.CellDoubleClick += DataGridView1_CellDoubleClick;
+        }
+
+        private void DataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridView1.Rows[_batch.StartIndex].DefaultCellStyle.BackColor = Color.White;
+            _batch.StartIndex = e.RowIndex;
+            dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Cyan;
+        }
+
+        private void DataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if(e.RowIndex == _batch.StartIndex)
+            {
+                e.CellStyle.BackColor = Color.Cyan;
+            }
+            //throw new NotImplementedException();
         }
 
         protected override void OnLoad(EventArgs e)
@@ -32,7 +51,7 @@ namespace JZExample
 
         private void SetupPrintController()
         {
-            _printController = new PrintController(_batch.Items);
+            _printController = new PrintController(_batch);
             _printController.FieldName = Settings.Default.QRField;
             _printController.CodeScaned += _printController_CodeScaned;
 
