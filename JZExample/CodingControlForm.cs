@@ -54,6 +54,8 @@ namespace JZExample
             _printController = new PrintController(_batch);
             _printController.FieldName = Settings.Default.QRField;
             _printController.CodeScaned += _printController_CodeScaned;
+            _printController.PrintCompleted += _printController_PrintCompleted;
+            _printController.Printed += _printController_Printed;
 
             _printController.SerialPort.BaudRate = Settings.Default.BaudRate;
             _printController.SerialPort.DataBits = Settings.Default.DataBitss;
@@ -61,6 +63,14 @@ namespace JZExample
             _printController.SerialPort.StopBits = StopBits.One;
             _printController.SerialPort.ReadTimeout = 1000;
             _printController.SerialPort.PortName = Settings.Default.PortName;
+        }
+
+        private void _printController_PrintCompleted(object sender, EventArgs e)
+        {
+            var confirmCount = _batch.Items.Where(i => i.Status == BatchStatus.Confirmed).Count();
+            var msg = $"成功打印{confirmCount}条，共{_printController.BatchsToPrint.Length}条";
+            statusTextBox.Text = msg;
+            MessageBox.Show("打码完成", msg);
         }
 
         private void _printController_CodeScaned(object sender, CodeScanedEventArgs e)
@@ -84,10 +94,11 @@ namespace JZExample
             //codingInfoListView.Items.Add(e.Message);
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        //private void button2_Click(object sender, EventArgs e)
+        //{
+           
+        //    //Close();
+        //}
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
@@ -145,16 +156,16 @@ namespace JZExample
                 return;
             }
 
-            try
-            {
-                await _printController.X30Client.StateChangeAsync();
-                //Log("x30没有设置就绪，请查看设备");
-            }
-            catch (Exception e)
-            {
-                StartFailed($"x30无法就绪 {e.Message}");
-                return;
-            }
+            //try
+            //{
+            //    await _printController.X30Client.StateChangeAsync();
+            //    //Log("x30没有设置就绪，请查看设备");
+            //}
+            //catch (Exception e)
+            //{
+            //    StartFailed($"x30无法就绪 {e.Message}");
+            //    return;
+            //}
 
             try
             {
@@ -173,7 +184,7 @@ namespace JZExample
             {
                
                 //_printController.Logged += _printController_Logged;
-                _printController.Printed += _printController_Printed;
+               
             }
 
             _printController.Start();
@@ -181,8 +192,12 @@ namespace JZExample
 
         private void _printController_Printed(object sender, EventArgs e)
         {
-            var msg = $"已打印{_printController.BatchIndex}条，共{_printController.BatchsToPrint.Length}条";
+            //var msg = $"已打印{_printController.BatchIndex}条，共{_printController.BatchsToPrint.Length}条";
+
+            var confirmCount = _batch.Items.Where(i => i.Status == BatchStatus.Confirmed).Count();
+            var msg = $"成功打印{confirmCount}条，共{_printController.BatchsToPrint.Length}条";
             statusTextBox.Text = msg;
+            //MessageBox.Show("打码完成", msg);
         }
 
         private void compareBtn_Click(object sender, EventArgs e)
@@ -198,6 +213,7 @@ namespace JZExample
         private void returnButton_Click(object sender, EventArgs e)
         {
             //_batch.Items[0].Status = BatchStatus.NG;
+
             Close();
         }
     }

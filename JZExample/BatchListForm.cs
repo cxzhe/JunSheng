@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -16,6 +17,21 @@ namespace JZExample
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.CellContentClick += DataGridView1_CellContentClick;
             dataGridView1.CellDoubleClick += DataGridView1_CellDoubleClick;
+            dataGridView1.MultiSelect = false;
+
+            deleteToolStripMenuItem.Click += DeleteToolStripMenuItem_Click;
+        }
+
+        private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var cell = dataGridView1.SelectedCells[0];
+            var index = cell.RowIndex;
+            var batch = _batchs[index];
+            var msg = $"确定要删除批次{batch.BatchNo}";
+            if(MessageBox.Show(msg, "提示", MessageBoxButtons.OKCancel) == DialogResult.OK) {
+                _batchs.RemoveAt(index);
+                AppContext.Instance.DB.Delete(batch);
+            }
         }
 
         private void DataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -80,6 +96,11 @@ namespace JZExample
         {
             var settingForm = new SettingForm();
             settingForm.ShowDialog();
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
         }
     }
 }

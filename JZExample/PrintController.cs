@@ -124,6 +124,7 @@ namespace JZExample
                 {
                     if(IsComplete)
                     {
+                        await X30Client.StateChangeAsync(StateChangeStatus.Ready);
                         PrintCompleted?.Invoke(this, EventArgs.Empty);
                     }
                     else
@@ -172,7 +173,7 @@ namespace JZExample
             _isBusy = true;
             try
             {
-                await X30Client.StateChangeAsync();
+                await X30Client.StateChangeAsync(StateChangeStatus.Producing);
                 var jobUpdateCommand = new JobCommand();
                 var bi = _batchsToPrint[_batch.StartIndex];
 

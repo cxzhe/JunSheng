@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.IO;
+using System.ComponentModel;
 
 namespace JZExample
 {
@@ -51,6 +52,39 @@ namespace JZExample
         NotReady = 1
     }
 
+//    PackML State Code used
+//in NGPCL
+//Undefined 00
+//Off 01
+//Stopped 02
+//Starting 03
+//Ready 04
+//Standby 05
+//Producing 06
+//Stopping 07
+//Aborting 08
+//Aborted 09
+//Holding 10
+//Held 11
+    public enum StateChangeStatus
+    {
+        [Description("04")]
+        Ready,
+        [Description("06")]
+        Producing,
+    }
+
+    public static class StateChangeStatusExtension
+    {
+        public static string GetDescription(this Enum e)
+        {
+            var type = e.GetType();
+            var field = type.GetField(e.ToString());
+            var attribute = field.GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() as DescriptionAttribute;
+            return attribute?.Description;
+        }
+    }
+
     public class X30Client
     {
         private const int PORT = 21000;
@@ -86,10 +120,10 @@ namespace JZExample
             throw new InvalidDataException();
         }
 
-        public async Task StateChangeAsync()
+        public async Task StateChangeAsync(StateChangeStatus status)
         {
             //~ST | 04 |
-            var packet = "{~ST|06|}";
+            var packet = $"{{~ST|{status.GetDescription()}|}}";
             var response = await SendAsync(TcpClient, packet, Encoding);
 
             //if (response.StartsWith("{~DV0|") && response.Length > 6)

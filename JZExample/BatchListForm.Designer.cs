@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.importButton = new System.Windows.Forms.Button();
             this.settingButton = new System.Windows.Forms.Button();
@@ -36,7 +37,10 @@
             this.compleCountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.createTimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.printColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -53,6 +57,7 @@
             this.compleCountColumn,
             this.createTimeColumn,
             this.printColumn});
+            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Location = new System.Drawing.Point(12, 71);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
@@ -97,7 +102,7 @@
             // compleCountColumn
             // 
             this.compleCountColumn.DataPropertyName = "CompleteCount";
-            this.compleCountColumn.HeaderText = "完成数量";
+            this.compleCountColumn.HeaderText = "任务数量";
             this.compleCountColumn.Name = "compleCountColumn";
             this.compleCountColumn.ReadOnly = true;
             // 
@@ -116,6 +121,20 @@
             this.printColumn.ReadOnly = true;
             this.printColumn.Text = "打码";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteToolStripMenuItem.Text = "删除";
+            // 
             // BatchListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -128,6 +147,7 @@
             this.Name = "BatchListForm";
             this.Text = "批次管理";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -142,5 +162,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn compleCountColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn createTimeColumn;
         private System.Windows.Forms.DataGridViewButtonColumn printColumn;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }
 }
