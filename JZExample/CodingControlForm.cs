@@ -56,6 +56,7 @@ namespace JZExample
             _printController.CodeScaned += _printController_CodeScaned;
             _printController.PrintCompleted += _printController_PrintCompleted;
             _printController.Printed += _printController_Printed;
+            _printController.FatalError += _printController_FatalError;
 
             _printController.SerialPort.BaudRate = Settings.Default.BaudRate;
             _printController.SerialPort.DataBits = Settings.Default.DataBitss;
@@ -63,6 +64,11 @@ namespace JZExample
             _printController.SerialPort.StopBits = StopBits.One;
             _printController.SerialPort.ReadTimeout = 1000;
             _printController.SerialPort.PortName = Settings.Default.PortName;
+        }
+
+        private void _printController_FatalError(object sender, EventArgs e)
+        {
+            MessageBox.Show("连续三个没有识别成功", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void _printController_PrintCompleted(object sender, EventArgs e)

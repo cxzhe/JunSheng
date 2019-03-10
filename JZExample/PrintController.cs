@@ -54,6 +54,20 @@ namespace JZExample
             }
         }
 
+        private bool IsFatalError
+        {
+            get
+            {
+                if (_batchIndex < 3)
+                {
+                    return false;
+                }
+                BatchItem[] lastThressItems = new BatchItem[3];
+                Array.Copy(_batchsToPrint, _batchIndex - 3, lastThressItems, 0, 3);
+                return lastThressItems.All((i) => i.Status != BatchStatus.Confirmed);
+            }
+        }
+
         public int BatchIndex
         {
             get { return _batchIndex; }
@@ -73,6 +87,8 @@ namespace JZExample
         public event EventHandler<EventArgs> Printed;
         public event EventHandler<EventArgs> PrintCompleted;
         public event EventHandler<CodeScanedEventArgs> CodeScaned;
+        public event EventHandler<EventArgs> FatalError;
+
 
         //make sure printer is ready to print when create PrintController
         public PrintController(Batch batch)
@@ -132,6 +148,12 @@ namespace JZExample
                         CurrentBatchItem.Status = BatchStatus.Printed;
                         AppContext.Instance.DB.Update(CurrentBatchItem);
 
+                        if(IsFatalError)
+                        {
+                            FatalError?.Invoke(this, EventArgs.Empty);
+                            await X30Client.StateChangeAsync(StateChangeStatus.Ready);
+                            return;
+                        }
                         var jobUpdateCommand = new JobCommand();
                         var bi = _batchsToPrint[_batchIndex + 1];
 
