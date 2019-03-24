@@ -62,6 +62,16 @@ namespace JZExample
                 var codingForm = new CodingControlForm(this, batch);
                 Hide();
                 codingForm.Show();
+            }else if(e.ColumnIndex == dataGridView1.Columns.IndexOf(deleteColumn))
+            {
+                var index = e.RowIndex;
+                var batch = _batchs[index];
+                var msg = $"确定要删除批次{batch.BatchNo}";
+                if (MessageBox.Show(msg, "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    _batchs.RemoveAt(index);
+                    AppContext.Instance.DB.Delete(batch);
+                }
             }
         }
 

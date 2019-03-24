@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importButton = new System.Windows.Forms.Button();
             this.settingButton = new System.Windows.Forms.Button();
             this.batchColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,8 +39,7 @@
             this.compleCountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.createTimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.printColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -56,13 +57,28 @@
             this.itemsCountColumn,
             this.compleCountColumn,
             this.createTimeColumn,
-            this.printColumn});
+            this.printColumn,
+            this.deleteColumn});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Location = new System.Drawing.Point(12, 71);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(776, 367);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.deleteToolStripMenuItem.Text = "删除";
             // 
             // importButton
             // 
@@ -121,19 +137,11 @@
             this.printColumn.ReadOnly = true;
             this.printColumn.Text = "打码";
             // 
-            // contextMenuStrip1
+            // deleteColumn
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.deleteToolStripMenuItem.Text = "删除";
+            this.deleteColumn.DataPropertyName = "DeleteText";
+            this.deleteColumn.HeaderText = " ";
+            this.deleteColumn.Name = "deleteColumn";
             // 
             // BatchListForm
             // 
@@ -157,12 +165,13 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button importButton;
         private System.Windows.Forms.Button settingButton;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn batchColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemsCountColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn compleCountColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn createTimeColumn;
         private System.Windows.Forms.DataGridViewButtonColumn printColumn;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewButtonColumn deleteColumn;
     }
 }

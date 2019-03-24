@@ -46,6 +46,11 @@ namespace JZExample.Model
             get { return "打码"; }
         }
 
+        public string DeleteText
+        {
+            get { return "删除"; }
+        }
+
         protected void OnPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

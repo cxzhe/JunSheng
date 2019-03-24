@@ -58,12 +58,13 @@ namespace JZExample
         {
             get
             {
-                if (_batchIndex < 3)
+                int errorCount = 6;
+                if (_batchIndex < errorCount)
                 {
                     return false;
                 }
-                BatchItem[] lastThressItems = new BatchItem[3];
-                Array.Copy(_batchsToPrint, _batchIndex - 3, lastThressItems, 0, 3);
+                BatchItem[] lastThressItems = new BatchItem[errorCount];
+                Array.Copy(_batchsToPrint, _batchIndex - errorCount, lastThressItems, 0, errorCount);
                 return lastThressItems.All((i) => i.Status != BatchStatus.Confirmed);
             }
         }
@@ -140,6 +141,7 @@ namespace JZExample
                 {
                     if(IsComplete)
                     {
+                        _timer.Stop();
                         await X30Client.StateChangeAsync(StateChangeStatus.Ready);
                         PrintCompleted?.Invoke(this, EventArgs.Empty);
                     }
@@ -150,6 +152,7 @@ namespace JZExample
 
                         if(IsFatalError)
                         {
+                            _timer.Stop();
                             FatalError?.Invoke(this, EventArgs.Empty);
                             await X30Client.StateChangeAsync(StateChangeStatus.Ready);
                             return;
