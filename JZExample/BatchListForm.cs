@@ -97,10 +97,21 @@ namespace JZExample
             //openFileDialog.ShowDialog();
             if (openFileDialog.ShowDialog() == DialogResult.OK && openFileDialog.CheckFileExists)
             {
-                var form = new ConfirmImportDataForm(openFileDialog.FileName);
-                form.ShowDialog();
+                var excelLoader = new ExcelLoader();
+                try
+                {
+                    var batch = excelLoader.Load(openFileDialog.FileName);
+                    var form = new ConfirmImportDataForm(batch);
+                    form.ShowDialog();
+                }
+                catch (Exception exp)
+                {
+                    MessageBox.Show("无效文件", exp.Message);
+                }
             }
         }
+
+        
 
         private void settingButton_Click(object sender, EventArgs e)
         {

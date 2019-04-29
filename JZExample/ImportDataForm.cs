@@ -1,14 +1,9 @@
-﻿using JZExample.Model;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using JZExample.Model;
 
 namespace JZExample
 {
@@ -60,10 +55,10 @@ namespace JZExample
             if (_chooseFile?.Exists ?? false)
             {
                 var loader = new ExcelLoader();
-                var infos = loader.Load(_chooseFile.FullName);
+                var batch = loader.Load(_chooseFile.FullName);
                 if (!string.IsNullOrWhiteSpace(batchInfoTextBox.Text))
                 {
-                    foreach (var info in infos)
+                    foreach (var info in batch.Items)
                         info.BatchNo = batchInfoTextBox.Text;
                 }
 

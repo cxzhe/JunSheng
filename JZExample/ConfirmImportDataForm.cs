@@ -9,13 +9,12 @@ namespace JZExample
     public partial class ConfirmImportDataForm : Form
     {
         //private IEnumerable<BatchInfo> batchInfos;
-        private string _path;
-        private BatchItem[] _batchItems;
+        private Batch _batch;
 
-        public ConfirmImportDataForm(string path)
+        public ConfirmImportDataForm(Batch batch)
         {
             InitializeComponent();
-            _path = path;
+            _batch = batch;
             SetupDataGrid();
         }
 
@@ -29,9 +28,11 @@ namespace JZExample
         {
             base.OnLoad(e);
 
-            var excelLoader = new ExcelLoader();
-            _batchItems = excelLoader.Load(_path).ToArray();
-            dataGridView1.DataSource = _batchItems;
+            dataGridView1.DataSource = _batch.Items;
+            modelTextBox.Text = _batch.Model;
+            dateProducedTextBox.Text = _batch.DateProduced;
+            batchNoTextBox.Text = _batch.BatchNo;
+            itemCountTextBox.Text = _batch.Items.Length.ToString();
         }
 
         private void cancelBtn_Click(object sender, EventArgs e)
@@ -41,7 +42,7 @@ namespace JZExample
 
         private void importBtn_Click(object sender, EventArgs e)
         {
-            var batchNumber = batchTextBox.Text.Trim();
+            var batchNumber = modelTextBox.Text.Trim();
             if (string.IsNullOrWhiteSpace(batchNumber))
             {
                 MessageBox.Show($"批次不能为空");
@@ -56,24 +57,19 @@ namespace JZExample
                 return;
             }
 
-            var batch = new Batch()
-            {
-                BatchNo = batchNumber,
-                CreateTime = DateTime.Now,
-            };
+            _batch.CompleteCount = _batch.Items.Length;
+
             db.RunInTransaction(() =>
             {
-                db.Insert(batch);
-                foreach (var item in _batchItems)
+                db.Insert(_batch);
+                foreach (var item in _batch.Items)
                 {
-                    item.BatchId = batch.Id;
+                    item.BatchId = _batch.Id;
                     db.Insert(item);
                 }
             });
-            batch.Items = _batchItems;
-            batch.CompleteCount = _batchItems.Length;
 
-            AppContext.Instance.Batchs.Insert(0, batch);
+            AppContext.Instance.Batchs.Insert(0, _batch);
             //MessageBox.Show($"导入成功");
             Close();
         }

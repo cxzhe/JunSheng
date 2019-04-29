@@ -14,7 +14,10 @@ namespace JZExample.Model
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        public string Model { get; set; }
+        public string DateProduced { get; set; }
         public string BatchNo { get; set; }
+
         public DateTime CreateTime { get; set; }
 
         public int CompleteCount

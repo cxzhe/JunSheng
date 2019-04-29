@@ -10,7 +10,7 @@ namespace JZExample.Model
 {
     public class ExcelLoader
     {
-        public IEnumerable<BatchItem> Load(string path)
+        public Batch Load(string path)
         {
             var extension = Path.GetExtension(path).ToLower();
             if (string.IsNullOrEmpty(extension))
@@ -37,7 +37,7 @@ namespace JZExample.Model
             return null;
         }
 
-        private IEnumerable<BatchItem> Load(IWorkbook workbook)
+        private Batch Load(IWorkbook workbook)
         {
             if(null == workbook)
             {
@@ -55,8 +55,20 @@ namespace JZExample.Model
                 return null;
             }
 
+            if(sheet.LastRowNum <= 7)
+            {
+                return null;
+            }
+
+            var batch = new Batch();
+            batch.CreateTime = DateTime.Now;
+
+            batch.Model = GetCellValue(sheet.GetRow(1).Cells[1]);
+            batch.DateProduced = GetCellValue(sheet.GetRow(2).Cells[1]);
+            batch.BatchNo = GetCellValue(sheet.GetRow(3).Cells[1]);
+
             var batchInfoList = new List<BatchItem>();
-            for (int i = 0; i <= sheet.LastRowNum; i++)
+            for (int i = 6; i <= sheet.LastRowNum; i++)
             {
                 var row = sheet.GetRow(i);
                 if(IsPossibleData(row))
@@ -69,7 +81,22 @@ namespace JZExample.Model
                     batchInfoList.Add(bi);
                 }
             }
-            return batchInfoList;
+
+            batch.Items = batchInfoList.ToArray();
+            return batch;
+        }
+
+        private string GetCellValue(ICell cell)
+        {
+            switch (cell.CellType)
+            {
+                case CellType.Numeric:
+                    return cell.NumericCellValue.ToString();
+                case CellType.String:
+                    return cell.StringCellValue;
+                default:
+                    return null;
+            }
         }
 
         private bool IsPossibleData(IRow row)

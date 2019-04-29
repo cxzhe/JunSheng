@@ -34,7 +34,13 @@
             this.importBtn = new System.Windows.Forms.Button();
             this.cancelBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.batchTextBox = new System.Windows.Forms.TextBox();
+            this.modelTextBox = new System.Windows.Forms.TextBox();
+            this.dateProducedTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.batchNoTextBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.itemCountTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,10 +54,10 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.serialNumberColumn,
             this.qrColumn});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 78);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 105);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(800, 369);
+            this.dataGridView1.Size = new System.Drawing.Size(800, 415);
             this.dataGridView1.TabIndex = 0;
             // 
             // serialNumberColumn
@@ -73,7 +79,7 @@
             // 
             this.importBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.importBtn.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.importBtn.Location = new System.Drawing.Point(662, 465);
+            this.importBtn.Location = new System.Drawing.Point(662, 538);
             this.importBtn.Name = "importBtn";
             this.importBtn.Size = new System.Drawing.Size(150, 40);
             this.importBtn.TabIndex = 4;
@@ -85,7 +91,7 @@
             // 
             this.cancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelBtn.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cancelBtn.Location = new System.Drawing.Point(471, 465);
+            this.cancelBtn.Location = new System.Drawing.Point(471, 538);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(150, 40);
             this.cancelBtn.TabIndex = 5;
@@ -98,23 +104,78 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 35);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 6;
-            this.label1.Text = "批次：";
+            this.label1.Text = "产品型号：";
             // 
-            // batchTextBox
+            // modelTextBox
             // 
-            this.batchTextBox.Location = new System.Drawing.Point(58, 32);
-            this.batchTextBox.Name = "batchTextBox";
-            this.batchTextBox.Size = new System.Drawing.Size(354, 21);
-            this.batchTextBox.TabIndex = 7;
+            this.modelTextBox.Location = new System.Drawing.Point(83, 32);
+            this.modelTextBox.Name = "modelTextBox";
+            this.modelTextBox.Size = new System.Drawing.Size(315, 21);
+            this.modelTextBox.TabIndex = 7;
+            // 
+            // dateProducedTextBox
+            // 
+            this.dateProducedTextBox.Location = new System.Drawing.Point(497, 32);
+            this.dateProducedTextBox.Name = "dateProducedTextBox";
+            this.dateProducedTextBox.Size = new System.Drawing.Size(315, 21);
+            this.dateProducedTextBox.TabIndex = 9;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(426, 35);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 12);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "生产日期：";
+            // 
+            // batchNoTextBox
+            // 
+            this.batchNoTextBox.Location = new System.Drawing.Point(83, 68);
+            this.batchNoTextBox.Name = "batchNoTextBox";
+            this.batchNoTextBox.Size = new System.Drawing.Size(315, 21);
+            this.batchNoTextBox.TabIndex = 11;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 71);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 12);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "生产批号：";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(428, 71);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "总数量：";
+            // 
+            // itemCountTextBox
+            // 
+            this.itemCountTextBox.Location = new System.Drawing.Point(497, 68);
+            this.itemCountTextBox.Name = "itemCountTextBox";
+            this.itemCountTextBox.ReadOnly = true;
+            this.itemCountTextBox.Size = new System.Drawing.Size(315, 21);
+            this.itemCountTextBox.TabIndex = 13;
             // 
             // ConfirmImportDataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(824, 517);
-            this.Controls.Add(this.batchTextBox);
+            this.ClientSize = new System.Drawing.Size(824, 590);
+            this.Controls.Add(this.itemCountTextBox);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.batchNoTextBox);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.dateProducedTextBox);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.modelTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.importBtn);
@@ -135,6 +196,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn serialNumberColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn qrColumn;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox batchTextBox;
+        private System.Windows.Forms.TextBox modelTextBox;
+        private System.Windows.Forms.TextBox dateProducedTextBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox batchNoTextBox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox itemCountTextBox;
     }
 }
