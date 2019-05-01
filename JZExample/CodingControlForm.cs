@@ -52,7 +52,12 @@ namespace JZExample
         private void SetupPrintController()
         {
             _printController = new PrintController(_batch);
-            _printController.FieldName = Settings.Default.QRField;
+            _printController.ErrorCount = Settings.Default.ErrorCount;
+            _printController.QrCodeFieldName = Settings.Default.QRField;
+            _printController.ModelFieldName = Settings.Default.ModelKey;
+            _printController.DateProducedFieldName = Settings.Default.DateProducedKey;
+            _printController.BatchNoFieldName = Settings.Default.BatchNoKey;
+
             _printController.CodeScaned += _printController_CodeScaned;
             _printController.PrintCompleted += _printController_PrintCompleted;
             _printController.Printed += _printController_Printed;

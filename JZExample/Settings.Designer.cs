@@ -82,5 +82,53 @@ namespace JZExample {
                 this["PortName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("model")]
+        public string ModelKey {
+            get {
+                return ((string)(this["ModelKey"]));
+            }
+            set {
+                this["ModelKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("dop")]
+        public string DateProducedKey {
+            get {
+                return ((string)(this["DateProducedKey"]));
+            }
+            set {
+                this["DateProducedKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("bn")]
+        public string BatchNoKey {
+            get {
+                return ((string)(this["BatchNoKey"]));
+            }
+            set {
+                this["BatchNoKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int ErrorCount {
+            get {
+                return ((int)(this["ErrorCount"]));
+            }
+            set {
+                this["ErrorCount"] = value;
+            }
+        }
     }
 }

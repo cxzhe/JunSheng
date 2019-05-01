@@ -32,7 +32,11 @@ namespace JZExample
         private Timer _timer;
         
         public X30Client X30Client { get; private set; }
-        public string FieldName { get; set; }
+        public string QrCodeFieldName { get; set; }
+        public string ModelFieldName { get; set; }
+        public string DateProducedFieldName { get; set; }
+        public string BatchNoFieldName { get; set; }
+        public int ErrorCount { get; set; } = 6;
 
         private BatchItem[] _batchsToPrint;
         private Batch _batch;
@@ -58,13 +62,12 @@ namespace JZExample
         {
             get
             {
-                int errorCount = 6;
-                if (_batchIndex < errorCount)
+                if (_batchIndex < ErrorCount)
                 {
                     return false;
                 }
-                BatchItem[] lastThressItems = new BatchItem[errorCount];
-                Array.Copy(_batchsToPrint, _batchIndex - errorCount, lastThressItems, 0, errorCount);
+                BatchItem[] lastThressItems = new BatchItem[ErrorCount];
+                Array.Copy(_batchsToPrint, _batchIndex - ErrorCount, lastThressItems, 0, ErrorCount);
                 return lastThressItems.All((i) => i.Status != BatchStatus.Confirmed);
             }
         }
@@ -160,7 +163,10 @@ namespace JZExample
                         var jobUpdateCommand = new JobCommand();
                         var bi = _batchsToPrint[_batchIndex + 1];
 
-                        jobUpdateCommand.Fields.Add(FieldName, bi.QRCodeContent);
+                        jobUpdateCommand.Fields.Add(QrCodeFieldName, bi.QRCodeContent);
+                        jobUpdateCommand.Fields.Add(ModelFieldName, _batch.Model);
+                        jobUpdateCommand.Fields.Add(DateProducedFieldName, _batch.DateProduced);
+                        jobUpdateCommand.Fields.Add(BatchNoFieldName, _batch.BatchNo);
 
                         await X30Client.UpdateJob(jobUpdateCommand);
 
@@ -202,7 +208,7 @@ namespace JZExample
                 var jobUpdateCommand = new JobCommand();
                 var bi = _batchsToPrint[_batch.StartIndex];
 
-                jobUpdateCommand.Fields.Add(FieldName, bi.QRCodeContent);
+                jobUpdateCommand.Fields.Add(QrCodeFieldName, bi.QRCodeContent);
 
                 await X30Client.UpdateJob(jobUpdateCommand);
 

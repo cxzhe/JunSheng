@@ -17,5 +17,17 @@
     <Setting Name="PortName" Type="System.String" Scope="User">
       <Value Profile="(Default)">COM1</Value>
     </Setting>
+    <Setting Name="ModelKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">model</Value>
+    </Setting>
+    <Setting Name="DateProducedKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dop</Value>
+    </Setting>
+    <Setting Name="BatchNoKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">bn</Value>
+    </Setting>
+    <Setting Name="ErrorCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
