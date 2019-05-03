@@ -23,7 +23,12 @@ namespace JZExample
             portNameTextBox.Text = Settings.Default.PortName;
             baudRateTextBox.Text = Settings.Default.BaudRate.ToString();
             dataBitssTextBox.Text = Settings.Default.DataBitss.ToString();
+
             errorCountTextBox.Text = Settings.Default.ErrorCount.ToString();
+
+            gongKongPortNameTextBox.Text = Settings.Default.GongKongPortName;
+            gongKongBaudRateTextBox.Text = Settings.Default.GongKongBaudRate.ToString();
+            gongKongDataBitsTextBox.Text = Settings.Default.GongKongDataBits.ToString();
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -53,6 +58,18 @@ namespace JZExample
             }
 
             Settings.Default.Save();
+
+
+           
+            Settings.Default.GongKongPortName = gongKongPortNameTextBox.Text;
+            if (int.TryParse(gongKongBaudRateTextBox.Text, out int gkBaudRate))
+            {
+                Settings.Default.GongKongBaudRate = gkBaudRate;
+            }
+            if (int.TryParse(gongKongDataBitsTextBox.Text, out int gkDataBits))
+            {
+                Settings.Default.GongKongDataBits = gkDataBits;
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)

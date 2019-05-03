@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO.Ports;
 using System.Windows.Forms;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 using JZExample.Model;
 
@@ -14,6 +15,8 @@ namespace JZExample
         private Form _mainForm;
         private PrintController _printController;
         private Batch _batch;
+
+        private SerialPort _gongkongPort;
 
         public CodingControlForm(Form form, Batch batch)
         {
@@ -47,6 +50,15 @@ namespace JZExample
         {
             base.OnLoad(e);
             SetupPrintController();
+
+            _gongkongPort = new SerialPort();
+            _gongkongPort.BaudRate = Settings.Default.GongKongBaudRate;
+            _gongkongPort.DataBits = Settings.Default.GongKongDataBits;
+            _gongkongPort.Parity = Parity.None;
+            _gongkongPort.StopBits = StopBits.One;
+            _gongkongPort.ReadTimeout = 1000;
+            _gongkongPort.WriteTimeout = 1000;
+            _gongkongPort.PortName = Settings.Default.GongKongPortName;
         }
 
         private void SetupPrintController()
@@ -73,7 +85,9 @@ namespace JZExample
 
         private void _printController_FatalError(object sender, EventArgs e)
         {
-            MessageBox.Show("连续三个没有识别成功", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            var message = $"连续{_printController.ErrorCount}个没有识别成功";
+            MessageBox.Show(message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            StopGongKong();
         }
 
         private void _printController_PrintCompleted(object sender, EventArgs e)
@@ -82,6 +96,7 @@ namespace JZExample
             var msg = $"成功打印{confirmCount}条，共{_printController.BatchsToPrint.Length}条";
             statusTextBox.Text = msg;
             MessageBox.Show("打码完成", msg);
+            StopGongKong();
         }
 
         private void _printController_CodeScaned(object sender, CodeScanedEventArgs e)
@@ -116,6 +131,28 @@ namespace JZExample
             base.OnFormClosed(e);
             _printController.Close();
             _mainForm.Show();
+            _gongkongPort.Close();
+        }
+
+        private void StopGongKong()
+        {
+            if (!_gongkongPort.IsOpen)
+            {
+                _gongkongPort.Open();
+            }
+
+            Task.Run(() =>
+            {
+                try
+                {
+                    var message = "workhalt";
+                    //var bytes = System.Text.Encoding.ASCII.GetBytes(message);
+                    _gongkongPort.Write(message);
+                }
+                catch (Exception)
+                {
+                }
+            });
         }
 
         private void codingBtn_Click(object sender, EventArgs e)

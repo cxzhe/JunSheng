@@ -130,5 +130,41 @@ namespace JZExample {
                 this["ErrorCount"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM2")]
+        public string GongKongPortName {
+            get {
+                return ((string)(this["GongKongPortName"]));
+            }
+            set {
+                this["GongKongPortName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("115200")]
+        public int GongKongBaudRate {
+            get {
+                return ((int)(this["GongKongBaudRate"]));
+            }
+            set {
+                this["GongKongBaudRate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8")]
+        public int GongKongDataBits {
+            get {
+                return ((int)(this["GongKongDataBits"]));
+            }
+            set {
+                this["GongKongDataBits"] = value;
+            }
+        }
     }
 }
