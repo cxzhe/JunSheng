@@ -98,14 +98,12 @@
     <Compile Include="ConfirmImportDataForm.Designer.cs">
       <DependentUpon>ConfirmImportDataForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Database.cs" />
     <Compile Include="EditCompleteCountForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EditCompleteCountForm.Designer.cs">
       <DependentUpon>EditCompleteCountForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExcelHelper.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
