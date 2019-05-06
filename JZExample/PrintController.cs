@@ -163,10 +163,7 @@ namespace JZExample
                         var jobUpdateCommand = new JobCommand();
                         var bi = _batchsToPrint[_batchIndex + 1];
 
-                        jobUpdateCommand.Fields.Add(QrCodeFieldName, bi.QRCodeContent);
-                        jobUpdateCommand.Fields.Add(ModelFieldName, _batch.Model);
-                        jobUpdateCommand.Fields.Add(DateProducedFieldName, _batch.DateProduced);
-                        jobUpdateCommand.Fields.Add(BatchNoFieldName, _batch.BatchNo);
+                        PopulateJobCommandFields(jobUpdateCommand, bi.QRCodeContent);
 
                         await X30Client.UpdateJob(jobUpdateCommand);
 
@@ -208,7 +205,7 @@ namespace JZExample
                 var jobUpdateCommand = new JobCommand();
                 var bi = _batchsToPrint[_batch.StartIndex];
 
-                jobUpdateCommand.Fields.Add(QrCodeFieldName, bi.QRCodeContent);
+                PopulateJobCommandFields(jobUpdateCommand, bi.QRCodeContent);
 
                 await X30Client.UpdateJob(jobUpdateCommand);
 
@@ -227,6 +224,14 @@ namespace JZExample
             }
 
             _isBusy = false;
+        }
+
+        private void PopulateJobCommandFields(JobCommand command, string qrContent)
+        {
+            command.Fields.Add(QrCodeFieldName, qrContent);
+            command.Fields.Add(ModelFieldName, _batch.Model);
+            command.Fields.Add(DateProducedFieldName, _batch.DateProduced);
+            command.Fields.Add(BatchNoFieldName, _batch.BatchNo);
         }
 
         public void Start()

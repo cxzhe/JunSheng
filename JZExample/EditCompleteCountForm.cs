@@ -36,7 +36,7 @@ namespace JZExample
         private void button1_Click(object sender, EventArgs e)
         {
             if (int.TryParse(completeCountTextBox.Text, out int completeCount) && 
-                completeCount > 0 && completeCount < _batch.Items.Length)
+                completeCount > 0 && completeCount <= _batch.Items.Length)
             {
                 _batch.CompleteCount = completeCount;
                 AppContext.Instance.DB.Update(_batch);

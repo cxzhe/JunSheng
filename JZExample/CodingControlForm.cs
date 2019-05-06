@@ -85,18 +85,18 @@ namespace JZExample
 
         private void _printController_FatalError(object sender, EventArgs e)
         {
+            StopGongKong();
             var message = $"连续{_printController.ErrorCount}个没有识别成功";
             MessageBox.Show(message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            StopGongKong();
         }
 
         private void _printController_PrintCompleted(object sender, EventArgs e)
         {
+            StopGongKong();
             var confirmCount = _batch.Items.Where(i => i.Status == BatchStatus.Confirmed).Count();
             var msg = $"成功打印{confirmCount}条，共{_printController.BatchsToPrint.Length}条";
             statusTextBox.Text = msg;
             MessageBox.Show("打码完成", msg);
-            StopGongKong();
         }
 
         private void _printController_CodeScaned(object sender, CodeScanedEventArgs e)
@@ -131,6 +131,28 @@ namespace JZExample
             base.OnFormClosed(e);
             _printController.Close();
             _mainForm.Show();
+
+            if (!_gongkongPort.IsOpen)
+            {
+                try
+                {
+                    _gongkongPort.Open();
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+            }
+
+            try
+            {
+                var message = "workhalt";
+                //var bytes = System.Text.Encoding.ASCII.GetBytes(message);
+                _gongkongPort.Write(message);
+            }
+            catch (Exception)
+            {
+            }
             _gongkongPort.Close();
         }
 
@@ -138,7 +160,14 @@ namespace JZExample
         {
             if (!_gongkongPort.IsOpen)
             {
-                _gongkongPort.Open();
+                try
+                {
+                    _gongkongPort.Open();
+                }
+                catch (Exception)
+                {
+                    return;
+                }
             }
 
             Task.Run(() =>
