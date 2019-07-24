@@ -45,29 +45,29 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.titleLabel.AutoSize = true;
             this.titleLabel.Font = new System.Drawing.Font("SimSun", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.titleLabel.Location = new System.Drawing.Point(260, 9);
+            this.titleLabel.Location = new System.Drawing.Point(260, 10);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(399, 33);
+            this.titleLabel.Size = new System.Drawing.Size(463, 33);
             this.titleLabel.TabIndex = 8;
-            this.titleLabel.Text = "均晟公司自动打码控制系统";
+            this.titleLabel.Text = "江苏福瑞科技自动打码控制系统";
             // 
             // statusTextBox
             // 
             this.statusTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.statusTextBox.Location = new System.Drawing.Point(41, 133);
+            this.statusTextBox.Location = new System.Drawing.Point(41, 144);
             this.statusTextBox.Multiline = true;
             this.statusTextBox.Name = "statusTextBox";
             this.statusTextBox.ReadOnly = true;
-            this.statusTextBox.Size = new System.Drawing.Size(883, 84);
+            this.statusTextBox.Size = new System.Drawing.Size(883, 91);
             this.statusTextBox.TabIndex = 9;
             // 
             // startButton
             // 
             this.startButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.startButton.Location = new System.Drawing.Point(813, 60);
+            this.startButton.Location = new System.Drawing.Point(813, 65);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(111, 50);
+            this.startButton.Size = new System.Drawing.Size(111, 54);
             this.startButton.TabIndex = 10;
             this.startButton.Text = "开始打码";
             this.startButton.UseVisualStyleBackColor = true;
@@ -83,10 +83,10 @@
             this.serinalNoColumn,
             this.qrColumn,
             this.statusColumn});
-            this.dataGridView1.Location = new System.Drawing.Point(41, 245);
+            this.dataGridView1.Location = new System.Drawing.Point(41, 265);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(883, 353);
+            this.dataGridView1.Size = new System.Drawing.Size(883, 382);
             this.dataGridView1.TabIndex = 11;
             // 
             // serinalNoColumn
@@ -113,9 +113,9 @@
             // 
             // returnButton
             // 
-            this.returnButton.Location = new System.Drawing.Point(41, 60);
+            this.returnButton.Location = new System.Drawing.Point(41, 65);
             this.returnButton.Name = "returnButton";
-            this.returnButton.Size = new System.Drawing.Size(111, 50);
+            this.returnButton.Size = new System.Drawing.Size(111, 54);
             this.returnButton.TabIndex = 12;
             this.returnButton.Text = "返回";
             this.returnButton.UseVisualStyleBackColor = true;
@@ -123,9 +123,9 @@
             // 
             // CodingControlForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(975, 610);
+            this.ClientSize = new System.Drawing.Size(975, 661);
             this.Controls.Add(this.returnButton);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.startButton);
