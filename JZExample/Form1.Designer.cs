@@ -33,25 +33,23 @@
             this.label1 = new System.Windows.Forms.Label();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
             this.titleLabel.Font = new System.Drawing.Font("SimSun", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.titleLabel.Location = new System.Drawing.Point(216, 100);
+            this.titleLabel.Location = new System.Drawing.Point(216, 108);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(399, 33);
             this.titleLabel.TabIndex = 0;
-            this.titleLabel.Text = "均晟公司自动打码控制系统";
+            this.titleLabel.Text = "福瑞科技自动打码控制系统";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("SimSun", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(218, 193);
+            this.label1.Location = new System.Drawing.Point(218, 209);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(115, 21);
             this.label1.TabIndex = 1;
@@ -60,7 +58,7 @@
             // passwordTextBox
             // 
             this.passwordTextBox.Font = new System.Drawing.Font("SimSun", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.passwordTextBox.Location = new System.Drawing.Point(222, 230);
+            this.passwordTextBox.Location = new System.Drawing.Point(222, 249);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(286, 44);
@@ -71,32 +69,21 @@
             // 
             this.button1.AutoSize = true;
             this.button1.Font = new System.Drawing.Font("SimSun", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(514, 230);
+            this.button1.Location = new System.Drawing.Point(514, 249);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(89, 44);
+            this.button1.Size = new System.Drawing.Size(89, 48);
             this.button1.TabIndex = 3;
             this.button1.Text = "进入";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(474, 369);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(305, 60);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.pictureBox1);
+            this.ClientSize = new System.Drawing.Size(800, 488);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.label1);
@@ -106,8 +93,7 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "均晟公司自动打码控制系统";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Text = "福瑞科技自动打码控制系统";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,7 +105,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
