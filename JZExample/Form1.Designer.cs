@@ -41,9 +41,9 @@
             this.titleLabel.Font = new System.Drawing.Font("SimSun", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.titleLabel.Location = new System.Drawing.Point(216, 108);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(399, 33);
+            this.titleLabel.Size = new System.Drawing.Size(463, 33);
             this.titleLabel.TabIndex = 0;
-            this.titleLabel.Text = "福瑞科技自动打码控制系统";
+            this.titleLabel.Text = "江苏福瑞科技自动打码控制系统";
             // 
             // label1
             // 
@@ -93,7 +93,7 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "福瑞科技自动打码控制系统";
+            this.Text = "江苏福瑞科技自动打码控制系统";
             this.ResumeLayout(false);
             this.PerformLayout();
 
