@@ -31,6 +31,7 @@ namespace JZExample
             dataGridView1.DataSource = _batch.Items;
             modelTextBox.Text = _batch.Model;
             dateProducedTextBox.Text = _batch.DateProduced;
+            expireDataTextBox.Text = _batch.DateExpired;
             batchNoTextBox.Text = _batch.BatchNo;
             itemCountTextBox.Text = _batch.Items.Length.ToString();
         }
