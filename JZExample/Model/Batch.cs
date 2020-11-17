@@ -16,6 +16,7 @@ namespace JZExample.Model
         public int Id { get; set; }
         public string Model { get; set; }
         public string DateProduced { get; set; }
+        public string DateExpired { get; set; }
         public string BatchNo { get; set; }
 
         public DateTime CreateTime { get; set; }

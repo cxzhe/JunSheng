@@ -68,6 +68,7 @@ namespace JZExample
             _printController.QrCodeFieldName = Settings.Default.QRField;
             _printController.ModelFieldName = Settings.Default.ModelKey;
             _printController.DateProducedFieldName = Settings.Default.DateProducedKey;
+            _printController.DateExpiredFieldName = Settings.Default.DateExpiredKey;
             _printController.BatchNoFieldName = Settings.Default.BatchNoKey;
 
             _printController.CodeScaned += _printController_CodeScaned;

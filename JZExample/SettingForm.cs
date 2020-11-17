@@ -18,6 +18,7 @@ namespace JZExample
             qrcodeTextBox.Text = Settings.Default.QRField;
             modelTextBox.Text = Settings.Default.ModelKey;
             dateProducedTextBox.Text = Settings.Default.DateProducedKey;
+            textBoxExpiredDateKey.Text = Settings.Default.DateExpiredKey;
             batchNoTextBox.Text = Settings.Default.BatchNoKey;
 
             portNameTextBox.Text = Settings.Default.PortName;
@@ -40,6 +41,7 @@ namespace JZExample
 
             Settings.Default.ModelKey = modelTextBox.Text;
             Settings.Default.DateProducedKey = dateProducedTextBox.Text;
+            Settings.Default.DateExpiredKey = textBoxExpiredDateKey.Text;
             Settings.Default.BatchNoKey = batchNoTextBox.Text;
 
             if (int.TryParse(baudRateTextBox.Text,out int baudRate))
@@ -83,6 +85,16 @@ namespace JZExample
         }
 
         private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }

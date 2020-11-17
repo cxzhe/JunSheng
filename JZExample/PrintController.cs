@@ -35,6 +35,8 @@ namespace JZExample
         public string QrCodeFieldName { get; set; }
         public string ModelFieldName { get; set; }
         public string DateProducedFieldName { get; set; }
+        public string DateExpiredFieldName { get; set; }
+
         public string BatchNoFieldName { get; set; }
         public int ErrorCount { get; set; } = 6;
 
@@ -231,6 +233,7 @@ namespace JZExample
             command.Fields.Add(QrCodeFieldName, qrContent);
             command.Fields.Add(ModelFieldName, _batch.Model);
             command.Fields.Add(DateProducedFieldName, _batch.DateProduced);
+            command.Fields.Add(DateExpiredFieldName, _batch.DateExpired);
             command.Fields.Add(BatchNoFieldName, _batch.BatchNo);
         }
 

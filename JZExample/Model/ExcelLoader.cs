@@ -65,10 +65,11 @@ namespace JZExample.Model
 
             batch.Model = GetCellValue(sheet.GetRow(1).Cells[1]);
             batch.DateProduced = GetCellValue(sheet.GetRow(2).Cells[1]);
-            batch.BatchNo = GetCellValue(sheet.GetRow(3).Cells[1]);
+            batch.DateExpired = GetCellValue(sheet.GetRow(3).Cells[1]);
+            batch.BatchNo = GetCellValue(sheet.GetRow(4).Cells[1]);
 
             var batchInfoList = new List<BatchItem>();
-            for (int i = 6; i <= sheet.LastRowNum; i++)
+            for (int i = 7; i <= sheet.LastRowNum; i++)
             {
                 var row = sheet.GetRow(i);
                 if(IsPossibleData(row))
