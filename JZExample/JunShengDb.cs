@@ -32,15 +32,9 @@ namespace JZExample
             string fullPath = Path.Combine(dir, _defaultFileNameh);
 
             var db = new JunShengDb(fullPath);
-            if (!db.TableExists<BatchItem>())
-            {
-                db.CreateTable<BatchItem>();
-            }
-
-            if (!db.TableExists<Batch>())
-            {
-                db.CreateTable<Batch>();
-            }
+           
+            db.CreateTable<BatchItem>();
+            db.CreateTable<Batch>();
             return db;
         }
 

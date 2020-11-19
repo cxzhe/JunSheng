@@ -18,7 +18,6 @@ namespace JZExample.Model
         public string DateProduced { get; set; }
         public string DateExpired { get; set; }
         public string BatchNo { get; set; }
-
         public DateTime CreateTime { get; set; }
 
         public int CompleteCount
